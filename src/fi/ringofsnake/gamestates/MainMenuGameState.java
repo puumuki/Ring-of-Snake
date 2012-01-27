@@ -1,5 +1,5 @@
 package fi.ringofsnake.gamestates;
 
-public class MainMenuGameSate {
+public class MainMenuGameState {
 
 }
