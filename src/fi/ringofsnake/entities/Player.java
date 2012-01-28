@@ -22,20 +22,16 @@ public class Player extends AEntity {
 	// quick hack, ei näin
 	
 	private Impulse jumpImpulse;
-
-	private Image playerImg;
 	
 	private float maxSpeed = 1.0f;
 	
 	// FIXME
 	private int floorlevel = 350;
 	
-	private Vector2f grafityOfLove = new Vector2f(0.000f, 0.01f);
+	private Vector2f grafity = new Vector2f(0.000f, 0.01f);
 	
 	private static final float padScaling = 0.5f;
 	private static final float deadZone = 0.05f;
-	
-	private float gravity = 0.5f;
 	
 	JoystickListener listener;
 	
@@ -46,9 +42,7 @@ public class Player extends AEntity {
 		position = new Vector2f(10, floorlevel);
 		velocity = new Vector2f();
 		
-		friction = 0.98f;
-
-		playerImg = ResourceManager.fetchImage("PLAYER");
+		friction = 0.98f;		
 		
 		listener = new JoystickListener(this);
 		cont.getInput().addControllerListener(listener);
@@ -78,15 +72,9 @@ public class Player extends AEntity {
 	 * @param delta 
 	 */
 	@Override
-	public void update(GameContainer cont, int delta) throws SlickException {
-		
-		Input input = cont.getInput();
-		
+	public void update(GameContainer cont, int delta) throws SlickException {		
+		Input input = cont.getInput();		
 		updateMovement(input, delta);
-		/*
-		position.x += velocity.x * delta;
-		position.y += velocity.y * delta;
-		*/
 	}
 
 	/**
@@ -119,8 +107,8 @@ public class Player extends AEntity {
 		}
 		*/
 				
-		velocity.x += grafityOfLove.x;
-		velocity.y += grafityOfLove.y;
+		velocity.x += grafity.x;
+		velocity.y += grafity.y;
 		
 		velocity.x += x;
 		velocity.y += y;

@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
-<!-- SNAKE -->
-	<resource type="image" id="SNAKE_BODY_UPPER">resources\snake\body_up_placeholder.png</resource>
-	<resource type="image" id="SNAKE_BODY">resources\snake\body_placeholder.png</resource>
-	<resource type="image" id="SNAKE_BODY_LOWER">resources\snake\body_down_placeholder.png</resource>
-	
-
-	<!-- PLAYER -->
+<!-- PLAYER -->
 	<resource type="image" id="PLAYER">resources\player\player_placeholder.png</resource>
 	<resource type="animation" id="CAT_RUN" tw="256" th="128" duration="100">resources\player\cat_run.png</resource>
 
-	<!-- Main Menu -->
-	
+<!-- Main Menu -->
 	<resource type="sound" id="MENU_CLICK_SOUND">resources\sounds\menu.wav</resource>
 	<resource type="image" id="MENU_BG">resources\ui\snakeStartScreen_ringless_versio_2.png</resource>
 	
@@ -24,5 +17,9 @@
 
 	<!-- TILES -->	
 	<resource type="image" id="TILE_SPACE">resources\tiles\space.png</resource>	
-
+	<resource type="image" id="CORNER">resources\snake\corner_placeholder.png</resource>
+	<resource type="image" id="NARROW_CORNER">resources\snake\narrow_corner_placeholder.png</resource>
+	<resource type="image" id="STRAIGHT">resources\snake\straight_placeholder.png</resource>
+	<resource type="image" id="STRAIGHT_TO_NARROW">resources\snake\straight_to_narrow_placeholder.png</resource>
+	
 </resources>

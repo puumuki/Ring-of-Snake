@@ -10,12 +10,20 @@ public class Tile {
 	public static final int TILE_HEIGHT = 256;
 	
 	private Image image = null;
+	
+	public boolean flip_x = false, flip_y = false;
 
 	public Tile(Image image) {
 		assert (image != null);
 		assert (image.getWidth() > 0 && image.getHeight() > 0);
 
 		this.image = image;
+	}
+	
+	public Tile(Image image, boolean fx, boolean fy) {
+		this(image);
+		this.flip_x = fx;
+		this.flip_y = fy;
 	}
 
 	public Image getImage() {
@@ -33,11 +41,11 @@ public class Tile {
 			g.drawImage(image, x, y, 0, image.getHeight(), image.getWidth(), 0);
 		} else
 		if (!flip_x && !flip_y) {
-			render(g, x, y);
+			g.drawImage(image, x, y);
 		}
 	}
 
 	public void render( Graphics g, int x, int y) throws SlickException {
-		g.drawImage(image, x, y);
+		render(g, x, y, this.flip_x, this.flip_y);
 	}	
 }
