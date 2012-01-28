@@ -4,7 +4,6 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
-import org.newdawn.slick.geom.Rectangle;
 
 import fi.ringofsnake.io.ResourceManager;
 
@@ -50,9 +49,19 @@ public class SquirrelMob extends AEntity {
 		for (int i = 0; i < squirrels.length; i++) {
 			squirrels[i].render(cont, grap);
 		}
-
 	}
 
+	@Override
+	public boolean collaiding(AEntity entity) {		
+		for (Squirrel s : squirrels) {
+			if( s.collaiding(entity) ) {
+				return true;
+			}				
+		}
+		
+		return false;
+	}
+	
 	@Override
 	public void update(GameContainer cont, int delta) throws SlickException {
 		
