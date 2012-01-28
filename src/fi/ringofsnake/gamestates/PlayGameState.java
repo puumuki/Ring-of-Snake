@@ -4,7 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.Image;
+
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -13,9 +13,9 @@ import org.newdawn.slick.state.StateBasedGame;
 import fi.ringofsnake.main.Main;
 import fi.ringofsnake.entities.ScrollingBackGround;
 import fi.ringofsnake.entities.SnakeMap;
-import fi.ringofsnake.entities.Squirrel;
+
 import fi.ringofsnake.entities.SquirrelMob;
-import fi.ringofsnake.entities.Tile;
+
 import fi.ringofsnake.io.ResourceManager;
 import fi.ringofsnake.entities.Player;
 
@@ -41,6 +41,8 @@ public class PlayGameState extends BasicGameState {
 		return stateID;
 	}
 
+	private float tunnelHorizontalOffset = 0;	
+	private float tunnelSpeed = 0.1f;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -80,9 +82,11 @@ public class PlayGameState extends BasicGameState {
 		scrollingBackGround.render(container, g);
 		
 		//This moves the map position relative to cat
-		g.translate( (int)-player.position.x, (int) -player.position.y - 180 );
-		currentMap.render(container, g);
-		g.resetTransform();
+		g.translate( (int)-(player.position.x + tunnelHorizontalOffset), 
+						  -container.getHeight()/2 - 180 );
+		
+		currentMap.render(container, g);		
+		g.resetTransform();	
 		
 		// just for now
 		player.render(container, g);
@@ -111,8 +115,7 @@ public class PlayGameState extends BasicGameState {
 		Input input = container.getInput();
 		player.update(container, delta);
 
-		if (input.isKeyPressed(Input.KEY_PAUSE)
-				|| input.isKeyPressed(Input.KEY_ESCAPE)) {
+		if (input.isKeyPressed(Input.KEY_PAUSE)	|| input.isKeyPressed(Input.KEY_ESCAPE)) {
 			game.enterState(Main.MAINMENU_GAME_STATE);
 		}
 
@@ -123,11 +126,9 @@ public class PlayGameState extends BasicGameState {
 		float step = (float) Math.sin((double) (System.currentTimeMillis()) / 1000.0);
 		offset[0] = ((offset[0] + step) % mod);
 		offset[1] = ((offset[1] + step) % mod);
-		
-		//This adjust cat / player position relative to the screen
-		player.cameraOffsetX = container.getWidth() / 3 - player.getWidth();
-		player.cameraOffsetY = container.getHeight() / 2 ;
-		
+				
 		scrollingBackGround.update(container, delta);
+		
+		tunnelHorizontalOffset += tunnelSpeed * delta;
 	}
 }

@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.util.Log;
 
@@ -17,6 +18,8 @@ import fi.ringofsnake.util.Impulse;
 
 public class Player extends AEntity {
 
+	private Rectangle hitBox;
+	
 	private Animation running;
 	private Animation jumping;
 	
@@ -33,11 +36,6 @@ public class Player extends AEntity {
 	
 	private static final float padScaling = 0.5f;
 	private static final float deadZone = 0.05f;
-	
-	public float cameraOffsetX;
-	public float cameraOffsetY;
-	
-	
 	
 	/**
 	 * Creates a new player.
@@ -63,10 +61,12 @@ public class Player extends AEntity {
 	 */
 	@Override
 	public void render(GameContainer cont, Graphics grap) throws SlickException {
+
 		if(isJumping())
 			grap.drawAnimation(jumping, position.x, position.y);
 		else
 			grap.drawAnimation(running, position.x, position.y);
+		
 		grap.drawString("vX " + velocity.x, 300, 550);
 		grap.drawString("vY " + velocity.y, 300, 570);
 		grap.drawString("pX " + position.x, 10, 550);
@@ -149,5 +149,12 @@ public class Player extends AEntity {
 	
 	public int getHeight() {
 		return height;
+	}
+	
+	@Override
+	public boolean collaiding(AEntity entity) {	
+		
+		
+		
 	}
 }

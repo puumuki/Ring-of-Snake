@@ -4,11 +4,13 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
+import org.newdawn.slick.geom.Rectangle;
 
 import fi.ringofsnake.io.ResourceManager;
 
 public class SquirrelMob extends AEntity {
 
+		
 	private Squirrel[] squirrels;
 	
 	private Sound runningSound;
@@ -34,7 +36,10 @@ public class SquirrelMob extends AEntity {
 			if(Math.random() > 0.5)
 				alt = true;
 			
-			squirrels[i] = new Squirrel(x + (int)(Math.random() * 300), y + (int)(Math.random() * 500), speed, alt);
+			squirrels[i] = new Squirrel(x + (int)(Math.random() * 300), y + (int)(Math.random() * 450 - 50), speed, alt);
+			
+			
+			//this.shape = new Rectangle(x, y, width, height)
 		}
 		
 		runningSound = ResourceManager.fetchSound("SQUIRRELS_RUNNING");
