@@ -76,7 +76,7 @@ public abstract class AEntity implements Comparable<AEntity>, IGameObject {
 	}
 	
 	
-	public boolean collaiding( AEntity entity ) {
+	public boolean colliding( AEntity entity ) {
 		
 		if( shape != null && entity.shape != null ) {
 			return shape.contains(shape);

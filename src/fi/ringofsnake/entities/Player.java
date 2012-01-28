@@ -22,7 +22,7 @@ public class Player extends AEntity {
 	private float maxSpeed = 1.0f;
 	
 	// FIXME
-	private int floorlevel = 350;
+	private int floorlevel = 450;
 	
 	private Vector2f gravity = new Vector2f(0.000f, 0.01f);
 	private int width, height;
@@ -79,7 +79,7 @@ public class Player extends AEntity {
 	 */
 	@Override
 	public void update(GameContainer cont, int delta) throws SlickException {		
-		Input input = cont.getInput();		
+		Input input = cont.getInput();
 		updateMovement(input, delta);
 		updateHitbox();
 	}
@@ -99,17 +99,17 @@ public class Player extends AEntity {
 		float x = 0;
 		float y = 0;
 
-		if ( input.isKeyDown(Input.KEY_LEFT) ) {
+		if ( input.isKeyDown(Input.KEY_LEFT) || input.isControllerLeft(Input.ANY_CONTROLLER) ) {
 			if(velocity.x > -maxSpeed)
 				x = -0.01f;
 
 		}
-		if ( input.isKeyDown(Input.KEY_RIGHT)) {
+		if ( input.isKeyDown(Input.KEY_RIGHT) || input.isControllerRight(Input.ANY_CONTROLLER) ) {
 			if(velocity.x < maxSpeed)
 				x = 0.01f;
 		}
 		
-		if ( input.isKeyPressed(Input.KEY_UP) && touchingLand() ) {
+		if ( (input.isKeyPressed(Input.KEY_UP) || input.isButton1Pressed(Input.ANY_CONTROLLER)) && touchingLand() ) {
 			jumpImpulse.launch(0.2f, new Vector2f(0,-0.08f));
 		}
 				
