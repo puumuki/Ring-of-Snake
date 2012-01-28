@@ -2,21 +2,15 @@ package fi.ringofsnake.gamestates;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-<<<<<<< HEAD
 import org.newdawn.slick.Input;
-=======
 import org.newdawn.slick.Image;
->>>>>>> matiasw/master
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-<<<<<<< HEAD
 import fi.ringofsnake.main.Main;
-=======
 import fi.ringofsnake.entities.Map;
 import fi.ringofsnake.io.ResourceManager;
->>>>>>> matiasw/master
 
 public class PlayGameState extends BasicGameState {
 
