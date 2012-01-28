@@ -48,7 +48,7 @@ public class PlayGameState extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		
-		currentMap = new SnakeMap(10, 3);
+		currentMap = new SnakeMap(3000, 3);
 		player = new Player(container);
 
 		gamePlayMusic = ResourceManager.fetchMusic("GAMEPLAY_BG_MUSIC");
