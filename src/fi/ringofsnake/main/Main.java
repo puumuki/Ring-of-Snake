@@ -13,6 +13,7 @@ import fi.ringofsnake.gamestates.PlayGameState;
 
 public class Main extends StateBasedGame {
 
+
     public static final int MAINMENU_GAME_STATE = 0;
     public static final int PLAY_GAME_STATE = 1;
     public static final int OPTIONS_GAME_STATE = 2;

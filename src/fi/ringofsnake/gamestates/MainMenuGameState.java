@@ -1,22 +1,25 @@
 package fi.ringofsnake.gamestates;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.util.Log;
 
+
 import fi.ringofsnake.entities.AEntity;
-import fi.ringofsnake.io.ResourceManager;
+
 import fi.ringofsnake.main.Main;
+
+import fi.ringofsnake.io.ResourceManager;
+
 import fi.ringofsnake.ui.menu.BasicMenuItem;
 import fi.ringofsnake.ui.menu.Menu;
 
@@ -59,7 +62,18 @@ public class MainMenuGameState extends BasicGameState {
 			for( AEntity entity : entities ) {
 				entity.render(container, g);
 			}
-			
+		}
+		
+		@Override
+
+		public void update(GameContainer container, 
+						   StateBasedGame game, 
+						   int delta)	throws SlickException {
+
+			for (AEntity entity : entities) {
+				entity.update(container, delta);
+			}			
+
 			Input input =container.getInput();
 			
 			if(input.isKeyPressed(Input.KEY_ENTER)) {
@@ -70,16 +84,6 @@ public class MainMenuGameState extends BasicGameState {
 					container.exit();
 				}
 			}
-		}
-		
-		@Override
-		public void update(GameContainer container, 
-						   StateBasedGame game, 
-						   int delta)	throws SlickException {
-
-			for (AEntity entity : entities) {
-				entity.update(container, delta);
-			}			
 		}
 		
 		@Override
@@ -97,7 +101,8 @@ public class MainMenuGameState extends BasicGameState {
 				InputStream stream = getClass().getClassLoader().getResourceAsStream(path);			
 				ResourceManager.getInstance().loadResources(stream); 
 			} catch (Exception e) {
-				throw new SlickException("Sorry, I failed to load the resource file at " + path + ".");
+				e.printStackTrace();
+				throw new SlickException("Sorry, I failed to load the resource file at " + path + ": ");
 			}		 
 		}
 }

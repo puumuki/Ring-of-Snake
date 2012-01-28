@@ -5,8 +5,15 @@
 	<resource type="image" id="SNAKE_BODY_LOWER">resources\snake\body_down_placeholder.png</resource>
 	<resource type="image" id="SNAKE_BODY">resources\snake\body_placeholder.png</resource>
 	<resource type="image" id="SNAKE_BODY_UPPER">resources\snake\body_up_placeholder.png</resource>
+<<<<<<< HEAD
 	
 	
 	<!-- Main Menu -->
 	<resource type="sound" id="MENU_CLICK_SOUND">resources\sounds\menu.wav</resource>
+=======
+
+<!-- TILES -->	
+	<resource type="image" id="TILE_SPACE">resources\tiles\space.png</resource>	
+
+>>>>>>> matiasw/master
 </resources>
