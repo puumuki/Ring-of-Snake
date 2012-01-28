@@ -9,6 +9,9 @@ public class Tile {
 	public static final int TILE_WIDTH = 256;
 	public static final int TILE_HEIGHT = 256;
 	
+	protected boolean flip_x = false;
+	protected boolean flip_y = false;
+	
 	private Image image = null;
 
 	public Tile(Image image) {

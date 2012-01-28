@@ -8,27 +8,27 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import fi.ringofsnake.entities.Player;
 import fi.ringofsnake.main.Main;
 import fi.ringofsnake.entities.SnakeMap;
+import fi.ringofsnake.entities.Tile;
 import fi.ringofsnake.io.ResourceManager;
+import fi.ringofsnake.entities.Player;
 
 public class PlayGameState extends BasicGameState {
 
 	private int stateID = -1;
-
 	private Player player;
 
-	private Image snakeUpper;
-	private Image snakeBody;
-	private Image snakeLower;
-	
-	private SnakeMap current_map = null;
+	private SnakeMap currentMap = null;
 	
 	private float[] offset = {0.0f, 0.0f};
-	
+
 	public PlayGameState(int stateID) {
 		this.stateID = stateID;
+	}
+
+	public int getID() {
+		return stateID;
 	}
 	
 	@Override
@@ -36,20 +36,21 @@ public class PlayGameState extends BasicGameState {
 			throws SlickException 
 	{
 		player = new Player();
-
-		current_map = new SnakeMap();
 		
-		snakeUpper = current_map.getTile('^').getImage();
-		snakeBody  = current_map.getTile('|').getImage();
-		snakeLower = current_map.getTile('v').getImage();
-		
+		currentMap = new SnakeMap();
+		player = new Player(container);		
 	}
 	
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException 
 	{
-		Image tile = current_map.getTile(0, 0).getImage();
+		//TODO read map
+		Image tile = currentMap.getTile(0, 0).getImage();
+		Image snakeUpper = currentMap.getTile('^').getImage();
+		Image snakeBody  = currentMap.getTile('|').getImage();
+		Image snakeLower = currentMap.getTile('v').getImage();
+
 		assert(tile.getWidth() > 0 && tile.getHeight() > 0);
 		
 		//Background
@@ -65,22 +66,23 @@ public class PlayGameState extends BasicGameState {
 			}
 		}
 		
-		//TODO read map
+		// just for now
+		player.render(container, g);
+
 		int x = 50;
 		int y = 50;
+		
 		g.drawImage(snakeUpper, x, y);
 		g.drawImage(snakeBody, x, y + snakeUpper.getHeight());
 		g.drawImage(snakeLower, x, y + snakeUpper.getHeight() + snakeBody.getHeight());
-
-		// just for now
-		g.fillRect(0, 30, 800, 500);
-		player.render(container, g);
+		
 	}
 	
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
-
+		
+		player.update(container, delta);
 		Input input = container.getInput();
 		player.update(container, delta);
 
@@ -88,16 +90,10 @@ public class PlayGameState extends BasicGameState {
 			game.enterState(Main.MAINMENU_GAME_STATE);
 		}
 		
-		int mod = current_map.getTile(0, 0).getImage().getHeight();	//assume rect tiles
-		//FIXME bg scrolling
+		int mod = currentMap.getTile(0, 0).getImage().getHeight();	//assume rect tiles
+		//FIXME bg scrolling, do this with camera?
 		float step = (float)Math.sin((double)(System.currentTimeMillis())/1000.0);
 		offset[0] = ((offset[0]+step)%mod); 
 		offset[1] = ((offset[1]+step)%mod);
 	}
-	
-	@Override
-	public int getID() {
-		return stateID;
-	}
-
 }

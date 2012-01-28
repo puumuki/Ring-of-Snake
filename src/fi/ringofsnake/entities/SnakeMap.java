@@ -11,6 +11,7 @@ import fi.ringofsnake.io.ResourceManager;
 public class SnakeMap implements IGameObject {
 	
 	private char[][] map;
+	private int width, height;
 	private HashMap<Character, Tile> tiles = new HashMap<Character, Tile>();
 	
 	private static int DEFAULT_MAP_SIZE = 3;
@@ -23,21 +24,26 @@ public class SnakeMap implements IGameObject {
 		tiles.put('v', new Tile(ResourceManager.fetchImage("SNAKE_BODY_LOWER")));
 		return tiles;
 	}
+		
+	public SnakeMap(int w, int h)
+	{
+		width = w; height = h;
+		map = new char[w][h];
+		for (int i = 0; i < w; i++)
+			for (int j = 0; j < h; j++)
+				map[i][j] = ' ';		
+	}	
 
 	public SnakeMap()
 	{
-		//Map(DEFAULT_MAP_SIZE, DEFAULT_MAP_SIZE); //FIXME
+		this(DEFAULT_MAP_SIZE, DEFAULT_MAP_SIZE); 
 		createTileSet();
 	}
 	
-	public SnakeMap(int w, int h)
-	{
-		map = new char[w][h];
-	}	
-
 	public Tile getTile(int x, int y) {
-		//TODO
-		return tiles.get(' ');
+		assert(x >= 0 && x < width
+			&& y >= 0 && y < height);
+		return tiles.get(map[x][y]);
 	}
 	
 	public Tile getTile(char c) {
