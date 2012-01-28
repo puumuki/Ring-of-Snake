@@ -2,9 +2,12 @@ package fi.ringofsnake.gamestates;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+
+import fi.ringofsnake.main.Main;
 
 public class PlayGameState extends BasicGameState {
 
@@ -27,12 +30,16 @@ public class PlayGameState extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
-		// TODO Auto-generated method stub
+
 		
+		Input input = container.getInput();
+		
+		if(input.isKeyPressed(Input.KEY_PAUSE ) || input.isKeyPressed(Input.KEY_ESCAPE)) {
+			game.enterState(Main.MAINMENU_GAME_STATE);
+		}
 	}
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
 		return stateID;
 	}
 

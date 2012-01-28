@@ -4,6 +4,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.util.Log;
 
 import fi.ringofsnake.gamestates.MainMenuGameState;
 import fi.ringofsnake.gamestates.OptionsGameState;
@@ -25,13 +26,16 @@ public class Main extends StateBasedGame {
 	/**
 	 * Game entry point
 	 * @param args possible arguments?
-	 * @throws SlickException if failure
 	 */
-	public static void main(String[] args) throws SlickException {		
-        AppGameContainer app = new AppGameContainer(new Main("Ring of Snake"));               
-        app.setShowFPS(false);        
-        app.setDisplayMode(800, 600, false);        
-        app.start();
+	public static void main(String[] args) {			        
+		try {
+			AppGameContainer app = new AppGameContainer(new Main("Ring of Snake"));               
+	        app.setShowFPS(false);        
+	        app.setDisplayMode(800, 600, false);        
+	        app.start();        
+		} catch (Exception e) {
+			Log.error(e);
+		}
 	}
 	
 	@Override

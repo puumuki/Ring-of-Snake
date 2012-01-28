@@ -44,7 +44,7 @@ public class MainMenuGameState extends BasicGameState {
 			int yOffset = 150;
 			
 			mainmenu.add("play", new BasicMenuItem(xOffset, yOffset , "Play"));
-			mainmenu.add("options", new BasicMenuItem(xOffset, yOffset + 50, "Options"));
+			//mainmenu.add("options", new BasicMenuItem(xOffset, yOffset + 50, "Options"));
 			mainmenu.add("info", new BasicMenuItem(xOffset, yOffset + 100, "Info"));
 			mainmenu.add("quit", new BasicMenuItem(xOffset, yOffset + 150, "Quit"));					
 			
@@ -99,13 +99,5 @@ public class MainMenuGameState extends BasicGameState {
 			} catch (Exception e) {
 				throw new SlickException("Sorry, I failed to load the resource file at " + path + ".");
 			}		 
-		}
-		
-		class MainMenuListener implements ActionListener {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-								
-			}
 		}
 }
