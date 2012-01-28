@@ -6,6 +6,10 @@
 	<resource type="image" id="SNAKE_BODY">resources\snake\body_placeholder.png</resource>
 	<resource type="image" id="SNAKE_BODY_UPPER">resources\snake\body_up_placeholder.png</resource>
 	
+
+	<!-- PLAYER -->
+	<resource type="image" id="PLAYER">resources\player\player_placeholder.png</resource>
+
 	<!-- Main Menu -->
 	<resource type="sound" id="MENU_CLICK_SOUND">resources\sounds\menu.wav</resource>
 
