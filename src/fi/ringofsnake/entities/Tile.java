@@ -1,34 +1,25 @@
 package fi.ringofsnake.entities;
 
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Tile implements IGameObject {
+public class Tile {
+
+	public static final int TILE_WIDTH = 256;
+	public static final int TILE_HEIGHT = 256;
 	
 	private Image image = null;
 
-	public Tile (Image image)
-	{
+	public Tile(Image image) {
 		this.image = image;
 	}
-	
-	public Image getImage()
-	{
+
+	public Image getImage() {
 		return image;
 	}
-	
-	@Override
-	public void update(GameContainer cont, int delta) throws SlickException {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void render(GameContainer cont, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
-		
+	public void render( Graphics g, int x, int y) throws SlickException {
+		g.drawImage(image, x, y);
 	}
-
 }
