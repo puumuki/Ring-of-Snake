@@ -27,7 +27,14 @@ public class InfoGameState extends BasicGameState {
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-		g.drawString("We have made this game so you could have fun. Yeah!\n\nPress enter to continue.", 10, 10);
+		g.drawString("CREDITS\n\n" +
+				"We have made this game in 48 hours at Tampere during the Global Game Jam 2012 so you could have fun. Yeah!\n\n" +
+				"Miika Hämynen\nTeemu Puukko\nWaltteri Reunamo\nMatias Wilkman\n\n" +
+				"Music: Ruulanko by Sami Juntunen (mutetus)\n\n" +
+				"Other credits\n" +
+				"http://commons.wikimedia.org/wiki/File:2008-09-15_(14)_Grass,_Gras.JPG by Vera Buhl, CC-BY-SA\n" +
+				"http://www.freesound.org/people/dobroide/sounds/41180/ by dobroide, CC-BY\n" +
+				"\n\nPress enter to continue.", 20, 20);
 		
 	}
 
