@@ -112,8 +112,7 @@ public class PlayGameState extends BasicGameState {
 	}
 	
 	@Override
-	public void update(GameContainer container, StateBasedGame game, int delta)
-			throws SlickException {
+	public void update(GameContainer container, StateBasedGame game, int delta)		throws SlickException {
 		squirrels.update(container, delta);
 		//player.update(container, delta);
 		Input input = container.getInput();

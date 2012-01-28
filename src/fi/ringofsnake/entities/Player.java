@@ -132,7 +132,7 @@ public class Player extends AEntity {
 			position.y = floorlevel;
 		}
 		
-		jumpImpulse.update(delta);
+		jumpImpulse.update(delta);		
 		
 		running.setSpeed( Math.abs(velocity.length() / 10 * delta) );
 	}
