@@ -1,5 +1,6 @@
 package fi.ringofsnake.gamestates;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -49,7 +50,7 @@ public class PlayGameState extends BasicGameState {
 		player = new Player(container);
 
 		gamePlayMusic = ResourceManager.fetchMusic("GAMEPLAY_BG_MUSIC");
-		gamePlayMusic.loop();
+
 		scrollingBackGround = new ScrollingBackGround(0.5f);
 		squirrels = new SquirrelMob();
 	}
@@ -60,7 +61,7 @@ public class PlayGameState extends BasicGameState {
 			throws SlickException {
 	
 		super.enter(container, game);
-		gamePlayMusic.play();		
+		gamePlayMusic.loop();	
 	}
 	
 	@Override
@@ -88,8 +89,20 @@ public class PlayGameState extends BasicGameState {
 		
 		//Draw scores and other things here. Bitch.
 		squirrels.render(container, g);
+		
+		drawDebugLines( container, g );
 	}
 
+	private void drawDebugLines( GameContainer cont, Graphics g ) {
+		
+		g.setColor(Color.red);
+		
+		for( int y = 50; y<cont.getHeight();y += 50) {
+			g.drawString( String.valueOf(y), 5, y);
+			g.drawLine(20, y, 40, y);
+		}
+	}
+	
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {

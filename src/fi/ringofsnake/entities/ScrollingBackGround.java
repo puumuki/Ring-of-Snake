@@ -49,7 +49,9 @@ public class ScrollingBackGround implements IGameObject {
 		g.drawImage(background,  (int)  - horizontalOffset + background.getWidth(), horizontalPos );
 		g.drawImage(background,  (int)  - horizontalOffset + background.getWidth()*2, horizontalPos );
 		
-		if( cont.getWidth() + background.getWidth() * 2 <= horizontalOffset ) {
+		System.out.println( horizontalOffset );
+		
+		if(  background.getWidth() * 2 < horizontalOffset ) {
 			horizontalOffset = 0;
 		}
 	}
