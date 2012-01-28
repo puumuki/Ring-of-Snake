@@ -26,5 +26,4 @@ public class ScrollingBackGround implements IGameObject {
 	public void render(GameContainer cont, Graphics g) throws SlickException {
 		
 	}
-
 }

@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -23,8 +24,10 @@ public class PlayGameState extends BasicGameState {
 
 	private float[] offset = { 0.0f, 0.0f };
 
+	private Music gamePlayMusic;
+	
 	public PlayGameState(int stateID) {
-		this.stateID = stateID;
+		this.stateID = stateID;		
 	}
 
 	public int getID() {
@@ -38,8 +41,26 @@ public class PlayGameState extends BasicGameState {
 		
 		currentMap = new SnakeMap(10, 3);
 		player = new Player(container);
+		gamePlayMusic = ResourceManager.fetchMusic("GAMEPLAY_BG_MUSIC");
+		gamePlayMusic.loop();
 	}
 
+	@Override
+	public void enter(GameContainer container, StateBasedGame game)
+			throws SlickException {
+	
+		super.enter(container, game);
+		gamePlayMusic.play();		
+	}
+	
+	@Override
+	public void leave(GameContainer container, StateBasedGame game)
+			throws SlickException {
+
+		super.leave(container, game);
+		gamePlayMusic.stop();
+	}
+	
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {

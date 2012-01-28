@@ -24,6 +24,10 @@
 	
 	
 	<!-- BACK GROUND -->
-	<resource type="image" id="STRAIGHT_TO_NARROW">resources\background\bg_lower.jpg</resource>
+	<resource type="image" id="GAMEPLAY_BG_BOTTOM">resources\background\bg_lower.jpg</resource>
+	
+	<!-- MUSIC -->
+	<resource type="music" id="GAMEPLAY_BG_MUSIC">resources\sounds\Ruulanko.ogg</resource>
+	
 	
 </resources>

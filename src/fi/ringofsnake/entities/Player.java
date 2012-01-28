@@ -38,6 +38,8 @@ public class Player extends AEntity {
 	public float cameraOffsetX;
 	public float cameraOffsetY;
 	
+	
+	
 	/**
 	 * Creates a new player.
 	 */
