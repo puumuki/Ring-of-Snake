@@ -15,7 +15,7 @@ import fi.ringofsnake.io.ResourceManager;
 
 public class Player extends AEntity {
 
-	// quick hack, ei näin
+	// quick hack, ei nï¿½in
 	private Image playerImg;
 	
 	private float maxSpeed = 0.4f;
@@ -86,6 +86,7 @@ public class Player extends AEntity {
 		float x = 0;
 		float y = 0;
 		
+
 		if( input.isKeyDown(Input.KEY_LEFT) || input.isControllerLeft(Input.ANY_CONTROLLER)) {
 			x = -0.1f;
 		}

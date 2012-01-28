@@ -11,7 +11,7 @@ public class Tile {
 	
 	private Image image = null;
 
-	public Tile(Image image) {
+	public Tile(Image image) {		
 		this.image = image;
 	}
 

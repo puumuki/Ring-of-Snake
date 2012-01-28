@@ -1,7 +1,6 @@
 package fi.ringofsnake.entities;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -11,39 +10,39 @@ import fi.ringofsnake.io.ResourceManager;
 
 public class SnakeMap implements IGameObject {
 	
-	private int width = 0;
-	private int height = 0;
-	
-	//FIXME: char -> enum ? enum TileType { PIPE, CURVED_PIPE, SUPER_PIPE };
 	private char[][] map;
+	private HashMap<Character, Tile> tiles = new HashMap<Character, Tile>();
 	
-	private Map<Character, Tile> tiles = new HashMap<Character, Tile>();
+	private static int DEFAULT_MAP_SIZE = 3;
 	
-	private static int DEFAULT_WIDTH = 3;
-	private static int DEFAULT_HEIGHT = 6;
+	private HashMap<Character, Tile> createTileSet()
+	{
+		tiles.put(' ', new Tile(ResourceManager.fetchImage("TILE_SPACE")));
+		tiles.put('^', new Tile(ResourceManager.fetchImage("SNAKE_BODY_UPPER")));
+		tiles.put('|', new Tile(ResourceManager.fetchImage("SNAKE_BODY")));
+		tiles.put('v', new Tile(ResourceManager.fetchImage("SNAKE_BODY_LOWER")));		
+		
+		return tiles;
+	}
 
 	public SnakeMap()
 	{
-		map = new char[DEFAULT_WIDTH][DEFAULT_HEIGHT];
-		tiles.put(' ', new Tile(ResourceManager.fetchImage("TILE_SPACE")));
+		//Map(DEFAULT_MAP_SIZE, DEFAULT_MAP_SIZE); //FIXME
+		createTileSet();
 	}
 	
 	public SnakeMap(int w, int h)
 	{
-		this.width = w;
-		this.height = h;
-		
-		map = new char[w][h];//FIXME matrix order?
+		map = new char[w][h];
 	}	
 
-	public Tile getTile(int x, int y) throws SlickException {
-		
-		if( x <  width && y < height ) {
-			return tiles.get(map[x][y]);	
-		}
-		
-		//Is there really need to support higher values? the map has limits and that is it.
-		throw new SlickException("Array out off order :(");
+	public Tile getTile(int x, int y) {
+		//TODO
+		return tiles.get(' ');
+	}
+	
+	public Tile getTile(char c) {
+		return tiles.get(c);
 	}
 	
 	@Override
@@ -53,13 +52,9 @@ public class SnakeMap implements IGameObject {
 	}
 
 	@Override
-	public void render(GameContainer cont, Graphics graphics) throws SlickException {		
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				Tile tile = tiles.get(map[x][y]);
-				tile.render( graphics, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGHT );
-			}
-		}		
+	public void render(GameContainer cont, Graphics g) throws SlickException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
