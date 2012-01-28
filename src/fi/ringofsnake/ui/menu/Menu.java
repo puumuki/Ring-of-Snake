@@ -55,7 +55,7 @@ public class Menu extends AEntity implements IGameObject, Iterable<IMenuItem> {
 	/**
 	 * Indicates is menu shown.
 	 */
-	private boolean enabled;
+	private boolean enabled = true;
 	
 	
 	/**
@@ -70,7 +70,7 @@ public class Menu extends AEntity implements IGameObject, Iterable<IMenuItem> {
 		
         initFont(topColor, bottomColor);
         
-		sound = ResourceManager.getInstance().getSound("MENU_SOUND");
+		sound = ResourceManager.getInstance().getSound("MENU_CLICK_SOUND");
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class Menu extends AEntity implements IGameObject, Iterable<IMenuItem> {
 	 */
 	public Menu( Color fontTopColor, Color fontBottomColor ) throws SlickException {
 		initFont(fontTopColor, fontBottomColor);
-		sound = ResourceManager.getInstance().getSound("MENU_SOUND");
+		sound = ResourceManager.getInstance().getSound("MENU_CLICK_SOUND");
 		enabled = false;
 	}
 
@@ -89,8 +89,8 @@ public class Menu extends AEntity implements IGameObject, Iterable<IMenuItem> {
 		java.awt.Font awtFont = new java.awt.Font("Ariel", java.awt.Font.PLAIN, 30);
         font = new UnicodeFont(awtFont);
         font.addAsciiGlyphs();       
-        OutlineEffect outlineEffect = new OutlineEffect(5, Color.black);
-                
+        
+        OutlineEffect outlineEffect = new OutlineEffect(5, Color.WHITE);                
         font.getEffects().add(new GradientEffect(topColor, bottomColor, 1f));
         
         font.loadGlyphs();
