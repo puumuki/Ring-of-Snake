@@ -25,6 +25,7 @@
 
 <!-- OBJECTS -->
 	<resource type="image" id="BOX">resources\objects\Farm-Fresh_box.png</resource>
+	<resource type="image" id="GOO">resources\objects\lima.png</resource>
 
 <!-- Main Menu -->
 	<resource type="sound" id="MENU_CLICK_SOUND">resources\sounds\menu.wav</resource>

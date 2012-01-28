@@ -12,6 +12,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fi.ringofsnake.main.Main;
+import fi.ringofsnake.entities.Box;
 import fi.ringofsnake.entities.ScrollingBackGround;
 import fi.ringofsnake.entities.SnakeMap;
 
@@ -45,6 +46,8 @@ public class PlayGameState extends BasicGameState {
 	private float tunnelHorizontalOffset = 0;	
 	private float tunnelSpeed = 0.5f;
 	
+	private Box box;
+	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
@@ -56,6 +59,8 @@ public class PlayGameState extends BasicGameState {
 
 		scrollingBackGround = new ScrollingBackGround(0.5f);
 		squirrels = new SquirrelMob();
+		
+		box = new Box(1500,400,-5.0f,0);
 	}
 
 
@@ -100,6 +105,8 @@ public class PlayGameState extends BasicGameState {
 		//Draw scores and other things here. Bitch.
 		
 		drawDebugLines( container, g );
+		
+		box.render(container, g);
 	}
 
 	private void drawDebugLines( GameContainer cont, Graphics g ) {
@@ -135,5 +142,6 @@ public class PlayGameState extends BasicGameState {
 		scrollingBackGround.update(container, delta);
 		
 		tunnelHorizontalOffset += tunnelSpeed * delta;
+		box.update(container, delta);
 	}
 }
