@@ -27,9 +27,6 @@ public class PlayGameState extends BasicGameState {
 	private SnakeMap currentMap = null;
 
 	private Player player;
-
-
-	private SnakeMap current_map = null;
 	
 	private float[] offset = {0.0f, 0.0f};
 
@@ -49,11 +46,11 @@ public class PlayGameState extends BasicGameState {
 		currentMap = new SnakeMap();
 		player = new Player(container);		
 	
-		System.out.println( "tile" + current_map.getTile('^'));
+		System.out.println( "Tile "  + currentMap.getTile('^'));
 		
-		snakeUpper = current_map.getTile('^').getImage();
-		snakeBody  = current_map.getTile('|').getImage();
-		snakeLower = current_map.getTile('v').getImage();
+		snakeUpper = currentMap.getTile('^').getImage();
+		snakeBody  = currentMap.getTile('|').getImage();
+		snakeLower = currentMap.getTile('v').getImage();
 		
 	}
 	
@@ -61,7 +58,7 @@ public class PlayGameState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException 
 	{
-		Image tile = current_map.getTile(0, 0).getImage();
+		Image tile = currentMap.getTile(0, 0).getImage();
 		assert(tile.getWidth() > 0 && tile.getHeight() > 0);
 		
 		//Background
@@ -102,7 +99,7 @@ public class PlayGameState extends BasicGameState {
 			game.enterState(Main.MAINMENU_GAME_STATE);
 		}
 		
-		int mod = current_map.getTile(0, 0).getImage().getHeight();	//assume rect tiles
+		int mod = currentMap.getTile(0, 0).getImage().getHeight();	//assume rect tiles
 		//FIXME bg scrolling
 		float step = (float)Math.sin((double)(System.currentTimeMillis())/1000.0);
 		offset[0] = ((offset[0]+step)%mod); 
