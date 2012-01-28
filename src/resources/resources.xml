@@ -22,4 +22,8 @@
 	<resource type="image" id="STRAIGHT">resources\snake\straight_placeholder.png</resource>
 	<resource type="image" id="STRAIGHT_TO_NARROW">resources\snake\straight_to_narrow_placeholder.png</resource>
 	
+	
+	<!-- BACK GROUND -->
+	<resource type="image" id="STRAIGHT_TO_NARROW">resources\background\bg_lower.jpg</resource>
+	
 </resources>

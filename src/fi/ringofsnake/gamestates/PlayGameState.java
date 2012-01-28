@@ -31,12 +31,12 @@ public class PlayGameState extends BasicGameState {
 		return stateID;
 	}
 
+	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
-		player = new Player(container);
-
-		currentMap = new SnakeMap();
+		
+		currentMap = new SnakeMap(10, 3);
 		player = new Player(container);
 	}
 
@@ -44,23 +44,16 @@ public class PlayGameState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
 		// TODO read map
-		Tile tile = currentMap.getTile(0, 0);
 
-		// Background
-		for (int i = -1, n = container.getScreenWidth()
-				/ tile.getImage().getWidth() + 1; i < n; i++) {
-			for (int j = -1, m = container.getScreenWidth()
-					/ tile.getImage().getWidth() + 1; j < m; j++) {
-				tile.render(g,
-						(int) (i * tile.getImage().getWidth() + offset[0]),
-						(int) (j * tile.getImage().getHeight() + offset[1]),
-						i % 2 == 1, j % 2 == 1);
-			}
-		}
-
+		//This moves the map position relative to cat
+		g.translate( (int)-player.position.x, (int) -player.position.y - 180 );
+		currentMap.render(container, g);
+		g.resetTransform();
+		
 		// just for now
 		player.render(container, g);
-
+		
+		//Draw scores and other things here. Bitch.
 	}
 
 	@Override
@@ -80,9 +73,12 @@ public class PlayGameState extends BasicGameState {
 																	// rect
 																	// tiles
 		// FIXME bg scrolling, do this with camera?
-		float step = (float) Math
-				.sin((double) (System.currentTimeMillis()) / 1000.0);
+		float step = (float) Math.sin((double) (System.currentTimeMillis()) / 1000.0);
 		offset[0] = ((offset[0] + step) % mod);
 		offset[1] = ((offset[1] + step) % mod);
+		
+		//This adjust cat / player position relative to the screen
+		player.cameraOffsetX = container.getWidth() / 3 - player.getWidth();
+		player.cameraOffsetY = container.getHeight() / 2 ;
 	}
 }

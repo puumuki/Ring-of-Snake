@@ -28,12 +28,15 @@ public class Player extends AEntity {
 	// FIXME
 	private int floorlevel = 350;
 	
+	private int width, height;
+	
 	private Vector2f grafity = new Vector2f(0.000f, 0.01f);
 	
 	private static final float padScaling = 0.5f;
 	private static final float deadZone = 0.05f;
 	
-	JoystickListener listener;
+	public float cameraOffsetX;
+	public float cameraOffsetY;
 	
 	/**
 	 * Creates a new player.
@@ -43,13 +46,13 @@ public class Player extends AEntity {
 		velocity = new Vector2f();
 		
 		friction = 0.98f;		
-		
-		listener = new JoystickListener(this);
-		cont.getInput().addControllerListener(listener);
-		
+			
 		jumpImpulse = new Impulse(0, new Vector2f(0.0f, 0.0f), this );
 		
 		running = ResourceManager.fetchAnimation("CAT_RUN");
+		
+		width = running.getWidth();
+		height = running.getHeight();
 	}
 	
 	/**
@@ -59,7 +62,7 @@ public class Player extends AEntity {
 	 */
 	@Override
 	public void render(GameContainer cont, Graphics grap) throws SlickException {
-		grap.drawAnimation(running, position.x, position.y);
+		grap.drawAnimation(running, cameraOffsetX, cameraOffsetY);		
 		grap.drawString("vX " + velocity.x, 300, 550);
 		grap.drawString("vY " + velocity.y, 300, 570);
 		grap.drawString("pX " + position.x, 10, 550);
@@ -125,9 +128,19 @@ public class Player extends AEntity {
 		}
 		
 		jumpImpulse.update(delta);
+		
+		running.setSpeed( Math.abs(velocity.length() / 10 * delta) );
 	}
 	
 	private boolean touchingLand() {
 		return position.y >= 350;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 }

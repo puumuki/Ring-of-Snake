@@ -21,6 +21,7 @@ public class SnakeMap implements IGameObject {
 	}
 	
 	private Tileset[][] map;
+	
 	private int width, height;
 	
 	private static int DEFAULT_MAP_SIZE = 3;
@@ -45,31 +46,20 @@ public class SnakeMap implements IGameObject {
 	{
 		width = w; height = h;
 		map = new Tileset[w][h];
-		for (int i = 0; i < w; i++) {
-			for (int j = 0; j < h; j++) {
-				if (j == 0)
-				{
-					if (i == 0)
-						map[i][j] = Tileset.CORNER_UL;
-					else if (i == w - 1)
-						map[i][j] = Tileset.CORNER_UR;
-					else
-						map[i][j] = Tileset.STRAIGHT;	//should be a tile with roof
-					continue;
-				}
-				if (i == 0) 
-				{
-					map[i][j] = Tileset.STRAIGHT;	//TODO rotated 90 deg to get up-down tunnel
-					continue;
-				}
-				if (j == h - 1)
-				{
-					map[i][j] = Tileset.CORNER_UR;
-					continue;
-				}
+	
+		for (int i = 0; i < width; i++) {				
+			for (int j = 0; j < height; j++) {
 				map[i][j] = Tileset.SPACE;
-			}	//end height loop
-		}	//end width loop
+			}
+		}
+		
+		map[0][1] = Tileset.STRAIGHT;
+		map[1][1] = Tileset.STRAIGHT;
+		map[2][1] = Tileset.STRAIGHT;
+		map[3][1] = Tileset.STRAIGHT;
+		map[4][1] = Tileset.CORNER_LR;
+			
+		createTileSet();
 	}	
 
 	public SnakeMap()
@@ -95,9 +85,20 @@ public class SnakeMap implements IGameObject {
 	}
 
 	@Override
-	public void render(GameContainer cont, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
-		
+	public void render(GameContainer cont, Graphics g) throws SlickException {		
+		for( int x = 0; x < width; x++ ) {
+			for( int y = 0; y < height; y++ ) {
+				tiles.get(map[x][y]).render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGHT);
+			}	
+		}	
 	}
 
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
 }
