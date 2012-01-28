@@ -47,9 +47,6 @@ public class PlayGameState extends BasicGameState {
 	{
 		//TODO read map
 		Tile tile = currentMap.getTile(0, 0);
-		Image snakeUpper = currentMap.getTile('^').getImage();
-		Image snakeBody  = currentMap.getTile('|').getImage();
-		Image snakeLower = currentMap.getTile('v').getImage();
 		
 		//Background
 		for (int i = -1, n = container.getScreenWidth()/tile.getImage().getWidth() + 1; 
@@ -60,7 +57,6 @@ public class PlayGameState extends BasicGameState {
 					 j < m; 
 					 j++) 
 			{ 
-				//g.drawImage(tile.getImage(), i*tile.getWidth() + offset[0], j*tile.getHeight() + offset[1]);
 				tile.render(g, (int)(i*tile.getImage().getWidth() + offset[0]), 
 							   (int)(j*tile.getImage().getHeight() + offset[1]), i%2==1, j%2==1);
 			}
@@ -69,13 +65,6 @@ public class PlayGameState extends BasicGameState {
 		// just for now
 		player.render(container, g);
 
-		int x = 50;
-		int y = 50;
-		
-		g.drawImage(snakeUpper, x, y);
-		g.drawImage(snakeBody, x, y + snakeUpper.getHeight());
-		g.drawImage(snakeLower, x, y + snakeUpper.getHeight() + snakeBody.getHeight());
-		
 	}
 	
 	@Override
