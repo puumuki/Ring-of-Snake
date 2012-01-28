@@ -12,11 +12,14 @@ import org.newdawn.slick.util.Log;
 
 import fi.ringofsnake.controllers.JoystickListener;
 import fi.ringofsnake.io.ResourceManager;
+import fi.ringofsnake.util.Impulse;
 
 public class Player extends AEntity {
 
 
 	// quick hack, ei näin
+	
+	private Impulse jumpImpulse;
 
 	private Image playerImg;
 	
@@ -47,6 +50,8 @@ public class Player extends AEntity {
 		
 		listener = new JoystickListener(this);
 		cont.getInput().addControllerListener(listener);
+		
+		jumpImpulse = new Impulse(0, new Vector2f(0.0f, 0.0f), this );
 	}
 	
 	/**
@@ -85,8 +90,8 @@ public class Player extends AEntity {
 	 * @param input mouse, keyboard and controller input wrapper
 	 * @param delta
 	 */
-	private void updateMovement(Input input, int delta) {
-
+	private void updateMovement(Input input, int delta) {		
+		
 		float x = 0;
 		float y = 0;
 
@@ -99,8 +104,10 @@ public class Player extends AEntity {
 			if(velocity.x < maxSpeed)
 				x = 0.01f;
 		}
-		if ( input.isKeyDown(Input.KEY_UP) ) {
-			y -= 0.1f; 
+		System.out.println( jumpImpulse.isAffecting());
+		
+		if ( input.isKeyPressed(Input.KEY_UP) && touchingLand() ) {
+			jumpImpulse.launch(0.2f, new Vector2f(0,-0.08f));
 		}
 		/*
 		if( input.isKeyDown(Input.KEY_DOWN)) {
@@ -121,8 +128,14 @@ public class Player extends AEntity {
 				
 		position.y += velocity.y * delta;
 		
-		if( position.y > 350 ) {
+		if( touchingLand() ) {
 			position.y = 350;
 		}
+		
+		jumpImpulse.update(delta);
+	}
+	
+	private boolean touchingLand() {
+		return position.y >= 350;
 	}
 }
