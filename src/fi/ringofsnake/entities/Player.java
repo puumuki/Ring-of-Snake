@@ -15,18 +15,20 @@ import fi.ringofsnake.io.ResourceManager;
 
 public class Player extends AEntity {
 
-	// quick hack, ei n�in
+	// quick hack, ei näin
 	private Image playerImg;
 	
-	private float maxSpeed = 0.4f;
+	private float maxSpeed = 1.0f;
 	
 	// FIXME
 	private int floorlevel = 350;
 	
-	private boolean descending = false;
+	private Vector2f grafityOfLove = new Vector2f(0.000f, 0.01f);
 	
-	private static final float padScaling = 0.05f;
+	private static final float padScaling = 0.5f;
 	private static final float deadZone = 0.05f;
+	
+	private float gravity = 0.5f;
 	
 	JoystickListener listener;
 	
@@ -37,8 +39,7 @@ public class Player extends AEntity {
 		position = new Vector2f(10, floorlevel);
 		velocity = new Vector2f();
 		
-		// TODO: shouldn't friction be defined according to the location of the player and not according to his own stats?
-		friction = 0.99f;
+		friction = 0.98f;
 
 		playerImg = ResourceManager.fetchImage("PLAYER");
 		
@@ -71,9 +72,10 @@ public class Player extends AEntity {
 		Input input = cont.getInput();
 		
 		updateMovement(input, delta);
-		
+		/*
 		position.x += velocity.x * delta;
 		position.y += velocity.y * delta;
+		*/
 	}
 
 	/**
@@ -85,29 +87,39 @@ public class Player extends AEntity {
 				
 		float x = 0;
 		float y = 0;
-		
-		
-		
-		if( input.isKeyDown(Input.KEY_LEFT) || input.isControllerLeft(Input.ANY_CONTROLLER)) {
-			x = -0.1f;
+
+		if ( input.isKeyDown(Input.KEY_LEFT) ) {
+			if(velocity.x > -maxSpeed)
+				x = -0.01f;
 		}
-		if( input.isKeyDown(Input.KEY_RIGHT) || input.isControllerRight(Input.ANY_CONTROLLER)) {
-			x = 0.1f;		
+		if ( input.isKeyDown(Input.KEY_RIGHT)) {
+			if(velocity.x < maxSpeed)
+				x = 0.01f;
 		}
-		if( input.isKeyDown(Input.KEY_UP) || input.isButton1Pressed(Input.ANY_CONTROLLER)) {
-			y -= 0.1f;
+		if ( input.isKeyDown(Input.KEY_UP) ) {
+			y -= 0.1f; 
 		}
+		/*
 		if( input.isKeyDown(Input.KEY_DOWN)) {
 			y += 0.1f;
 		}
+		*/
 				
-		velocity.x += x * padScaling;
-		velocity.y += y * padScaling;
+		velocity.x += grafityOfLove.x;
+		velocity.y += grafityOfLove.y;
+		
+		velocity.x += x;
+		velocity.y += y;
 		
 		velocity.x *= friction;
 		velocity.y *= friction;
 
 		position.x += velocity.x * delta;
+				
 		position.y += velocity.y * delta;
+		
+		if( position.y > 350 ) {
+			position.y = 350;
+		}
 	}
 }
