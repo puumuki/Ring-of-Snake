@@ -29,8 +29,9 @@ public class Main extends StateBasedGame {
 	 */
 	public static void main(String[] args) throws SlickException {		
         AppGameContainer app = new AppGameContainer(new Main("Ring of Snake"));               
-        app.setShowFPS(false);        
-        app.setDisplayMode(800, 600, false);        
+        app.setShowFPS(true);        
+        app.setDisplayMode(800, 600, false);
+        app.setTargetFrameRate(60);
         app.start();
 	}
 	
