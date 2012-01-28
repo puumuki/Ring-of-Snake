@@ -20,7 +20,6 @@ public class Player extends AEntity {
 	private Animation jumping;
 	
 	private Sound[] voices;
-
 	
 	private Impulse jumpImpulse;
 	
