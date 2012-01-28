@@ -12,6 +12,8 @@ import org.newdawn.slick.state.StateBasedGame;
 import fi.ringofsnake.main.Main;
 import fi.ringofsnake.entities.ScrollingBackGround;
 import fi.ringofsnake.entities.SnakeMap;
+import fi.ringofsnake.entities.Squirrel;
+import fi.ringofsnake.entities.SquirrelMob;
 import fi.ringofsnake.entities.Tile;
 import fi.ringofsnake.io.ResourceManager;
 import fi.ringofsnake.entities.Player;
@@ -20,6 +22,7 @@ public class PlayGameState extends BasicGameState {
 
 	private int stateID = -1;
 	private Player player;
+	private SquirrelMob squirrels;
 
 	private SnakeMap currentMap = null;
 
@@ -44,10 +47,13 @@ public class PlayGameState extends BasicGameState {
 		
 		currentMap = new SnakeMap(10, 3);
 		player = new Player(container);
+
 		gamePlayMusic = ResourceManager.fetchMusic("GAMEPLAY_BG_MUSIC");
 		gamePlayMusic.loop();
 		scrollingBackGround = new ScrollingBackGround(0.5f);
+		squirrels = new SquirrelMob();
 	}
+
 
 	@Override
 	public void enter(GameContainer container, StateBasedGame game)
@@ -81,13 +87,14 @@ public class PlayGameState extends BasicGameState {
 		player.render(container, g);
 		
 		//Draw scores and other things here. Bitch.
+		squirrels.render(container, g);
 	}
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
-
-		player.update(container, delta);
+		squirrels.update(container, delta);
+		//player.update(container, delta);
 		Input input = container.getInput();
 		player.update(container, delta);
 

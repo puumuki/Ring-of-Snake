@@ -4,6 +4,11 @@
 <!-- PLAYER -->
 	<resource type="image" id="PLAYER">resources\player\player_placeholder.png</resource>
 	<resource type="animation" id="CAT_RUN" tw="256" th="128" duration="100">resources\player\cat_run.png</resource>
+	
+<!-- MOBS -->
+	<resource type="animation" id="SQUIRREL_RUN" tw="256" th="128" duration="100">resources\squirrel\squirrel_running.png</resource>
+	<resource type="animation" id="SQUIRREL_RUN2" tw="256" th="128" duration="100">resources\squirrel\squirrel_running_2.png</resource>
+	<resource type="sound" id="SQUIRRELS_RUNNING">resources\sounds\squirrel_running.wav</resource>
 
 <!-- Main Menu -->
 	<resource type="sound" id="MENU_CLICK_SOUND">resources\sounds\menu.wav</resource>
