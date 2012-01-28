@@ -5,6 +5,7 @@ import java.io.InputStream;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -12,6 +13,7 @@ import org.newdawn.slick.util.Log;
 
 import sun.util.logging.resources.logging;
 
+import fi.ringofsnake.main.Main;
 import fi.ringofsnake.io.ResourceManager;
 
 public class MainMenuGameState extends BasicGameState {
@@ -24,6 +26,7 @@ public class MainMenuGameState extends BasicGameState {
 		public MainMenuGameState(int stateID) {
 			this.stateID = stateID;
 		}
+		
 		@Override
 		public void init(GameContainer container, StateBasedGame game)
 				throws SlickException {
@@ -52,8 +55,14 @@ public class MainMenuGameState extends BasicGameState {
 		@Override
 		public void update(GameContainer container, StateBasedGame game, int delta)
 				throws SlickException {
-			// TODO Auto-generated method stub
 			
+			Input input = container.getInput();
+			
+			if(input.isKeyPressed(Input.KEY_ENTER)) {
+				//TODO check state to enter
+				game.enterState(Main.PLAY_GAME_STATE);
+			}
+
 		}
 		@Override
 		public int getID() {
@@ -69,7 +78,8 @@ public class MainMenuGameState extends BasicGameState {
 				InputStream stream = getClass().getClassLoader().getResourceAsStream(path);			
 				ResourceManager.getInstance().loadResources(stream); 
 			} catch (Exception e) {
-				throw new SlickException("Sorry, I failed to load the resource file at " + path + ".");
+				e.printStackTrace();
+				throw new SlickException("Sorry, I failed to load the resource file at " + path + ": ");
 			}		 
 		}
 
