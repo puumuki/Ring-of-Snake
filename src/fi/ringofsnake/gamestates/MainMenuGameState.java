@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -30,6 +31,8 @@ public class MainMenuGameState extends BasicGameState {
 		private List<AEntity> entities = new ArrayList<AEntity>();
 		private Menu mainmenu;
 		
+		private Image menuBg;
+		
 		public MainMenuGameState(int stateID) {
 			this.stateID = stateID;
 		}
@@ -37,7 +40,9 @@ public class MainMenuGameState extends BasicGameState {
 		@Override
 		public void init(GameContainer container, StateBasedGame game) throws SlickException {				
 			loadResourceFile();			
-			initMainMenu( container );			
+			initMainMenu( container );
+			
+			menuBg = ResourceManager.fetchImage("MENU_BG");
 		}
 		
 		private void initMainMenu( GameContainer cont ) throws SlickException {
@@ -58,7 +63,9 @@ public class MainMenuGameState extends BasicGameState {
 		public void render(GameContainer container, 
 						  StateBasedGame game, 
 						  Graphics g) throws SlickException {
-
+			
+			menuBg.draw();
+			
 			for( AEntity entity : entities ) {
 				entity.render(container, g);
 			}

@@ -8,20 +8,15 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-
 import fi.ringofsnake.main.Main;
-import fi.ringofsnake.controllers.JoystickListener;
 import fi.ringofsnake.entities.SnakeMap;
 import fi.ringofsnake.entities.Tile;
 import fi.ringofsnake.io.ResourceManager;
-
 import fi.ringofsnake.entities.Player;
-
 
 public class PlayGameState extends BasicGameState {
 
 	private int stateID = -1;
-	
 
 	private Image snakeUpper;
 	private Image snakeBody;
@@ -49,17 +44,19 @@ public class PlayGameState extends BasicGameState {
 		snakeLower = ResourceManager.fetchImage("SNAKE_BODY_LOWER");
 		
 
-		currentMap = new SnakeMap();
 
-		
-		player = new Player(container);
-		
-	
+		currentMap = new SnakeMap();
+		player = new Player(container);		
 	}
 	
 	@Override
-	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
+	public void render(GameContainer container, StateBasedGame game, Graphics g)
+			throws SlickException {
 		
+		// just for now
+		player.render(container, g);
+
+
 		int x = 50;
 		int y = 50;
 		
@@ -80,7 +77,9 @@ public class PlayGameState extends BasicGameState {
 	}
 	
 	@Override
-	public void update(GameContainer container, StateBasedGame game, int delta)	throws SlickException {
+	public void update(GameContainer container, StateBasedGame game, int delta)
+			throws SlickException {
+		player.update(container, delta);
 		
 		player.update(container, delta);
 		Input input = container.getInput();

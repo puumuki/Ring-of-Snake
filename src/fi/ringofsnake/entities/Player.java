@@ -1,7 +1,5 @@
 package fi.ringofsnake.entities;
 
-import net.java.games.input.ControllerListener;
-
 import org.lwjgl.input.Controller;
 import org.lwjgl.input.Controllers;
 import org.newdawn.slick.GameContainer;
@@ -71,7 +69,6 @@ public class Player extends AEntity {
 	public void update(GameContainer cont, int delta) throws SlickException {
 		
 		Input input = cont.getInput();
-				
 		
 		updateMovement(input, delta);
 		
@@ -111,17 +108,4 @@ public class Player extends AEntity {
 		position.x += velocity.x * delta;
 		position.y += velocity.y * delta;
 	}
-
-	/**
-	 * checks if the player can jump from his current position
-	 * @return
-	 */
-	private boolean canJump() {
-		if(Math.abs(position.y - floorlevel) < 0.5)
-			return true;
-		return false;
-	}
-
-
-	
 }
