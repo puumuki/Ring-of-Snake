@@ -9,4 +9,6 @@
 <!-- PLAYER -->
 	<resource type="image" id="PLAYER">resources\player\player_placeholder.png</resource>
 
+<!-- Main Menu -->
+	<resource type="sound" id="MENU_CLICK_SOUND">resources\sounds\menu.wav</resource>
 </resources>
