@@ -21,7 +21,7 @@ public abstract class AEntity implements Comparable<AEntity>, IGameObject {
 	 * Entity velocity or speed
 	 */
 	public Vector2f velocity;
-	
+
 	/**
 	 * Friction affecting to entity
 	 */

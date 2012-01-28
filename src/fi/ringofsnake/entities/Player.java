@@ -86,7 +86,8 @@ public class Player extends AEntity {
 		float x = 0;
 		float y = 0;
 		
-
+		
+		
 		if( input.isKeyDown(Input.KEY_LEFT) || input.isControllerLeft(Input.ANY_CONTROLLER)) {
 			x = -0.1f;
 		}

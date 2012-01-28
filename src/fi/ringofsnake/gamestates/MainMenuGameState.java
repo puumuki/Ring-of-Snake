@@ -1,9 +1,11 @@
 package fi.ringofsnake.gamestates;
 
+import java.awt.Point;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -12,16 +14,15 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.newdawn.slick.util.Log;
 
-
 import fi.ringofsnake.entities.AEntity;
-
 import fi.ringofsnake.main.Main;
 
 import fi.ringofsnake.io.ResourceManager;
-
-import fi.ringofsnake.ui.menu.BasicMenuItem;
+import fi.ringofsnake.ui.menu.ImageMenuItem;
 import fi.ringofsnake.ui.menu.Menu;
 
 public class MainMenuGameState extends BasicGameState {
@@ -48,13 +49,21 @@ public class MainMenuGameState extends BasicGameState {
 		private void initMainMenu( GameContainer cont ) throws SlickException {
 			mainmenu = new Menu();
 			
-			int xOffset = cont.getWidth() / 3;
-			int yOffset = 150;
+			int xOffset = cont.getWidth() / 3 + 100;
+			int yOffset = cont.getHeight() / 3 + 40;
 			
-			mainmenu.add("play", new BasicMenuItem(xOffset, yOffset , "Play"));
-			//mainmenu.add("options", new BasicMenuItem(xOffset, yOffset + 50, "Options"));
-			mainmenu.add("info", new BasicMenuItem(xOffset, yOffset + 100, "Info"));
-			mainmenu.add("quit", new BasicMenuItem(xOffset, yOffset + 150, "Quit"));					
+			ImageMenuItem playItem = new ImageMenuItem( new Point(xOffset, yOffset), 
+														ResourceManager.fetchImage("MENU_BUTTON_PLAY"));
+			
+			ImageMenuItem infoItem = new ImageMenuItem( new Point(xOffset, yOffset + 120), 
+														ResourceManager.fetchImage("MENU_BUTTON_IFNO"));
+						
+			ImageMenuItem quitItem = new ImageMenuItem( new Point(xOffset, yOffset + 210), 
+														ResourceManager.fetchImage("MENU_BUTTON_QUIT"));
+
+			mainmenu.add("play", playItem);
+			mainmenu.add("info", infoItem);
+			mainmenu.add("quit", quitItem);					
 			
 			entities.add(mainmenu);
 		}
@@ -83,10 +92,16 @@ public class MainMenuGameState extends BasicGameState {
 
 			Input input =container.getInput();
 			
+			FadeInTransition in = new FadeInTransition(Color.white);
+			FadeOutTransition out = new FadeOutTransition(Color.white);
+			
 			if(input.isKeyPressed(Input.KEY_ENTER)) {
 				if( mainmenu.isActiveIndex("play") ) {
-					game.enterState(Main.PLAY_GAME_STATE);
-				}								
+					game.enterState(Main.PLAY_GAME_STATE, in, out);
+				}							
+				if( mainmenu.isActiveIndex("info")) {
+					game.enterState(Main.INFO_GAME_STATE, in, out);
+				}				
 				else if( mainmenu.isActiveIndex("quit") ) {
 					container.exit();
 				}
