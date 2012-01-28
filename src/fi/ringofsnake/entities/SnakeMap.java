@@ -53,11 +53,9 @@ public class SnakeMap implements IGameObject {
 			}
 		}
 		
-		map[0][1] = Tileset.STRAIGHT;
-		map[1][1] = Tileset.STRAIGHT;
-		map[2][1] = Tileset.STRAIGHT;
-		map[3][1] = Tileset.STRAIGHT;
-		map[4][1] = Tileset.CORNER_LR;
+		for (int i = 0; i < width; i++) {
+			map[i][1] = Tileset.STRAIGHT;
+		}
 			
 		createTileSet();
 	}	

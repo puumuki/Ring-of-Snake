@@ -3,6 +3,7 @@ package fi.ringofsnake.entities;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
 
 /**
@@ -11,6 +12,8 @@ import org.newdawn.slick.geom.Vector2f;
  * Class fields are public for performance reasons.
  */
 public abstract class AEntity implements Comparable<AEntity>, IGameObject {
+	
+	protected Shape shape;
 	
 	/**
 	 * Entity position
@@ -70,6 +73,16 @@ public abstract class AEntity implements Comparable<AEntity>, IGameObject {
 	public void setPos( int x, int y ) {	
 		position.x = x;
 		position.y = y;
+	}
+	
+	
+	public boolean colliding( AEntity entity ) {
+		
+		if( shape != null && entity.shape != null ) {
+			return shape.contains(shape);
+		}
+		
+		return false;
 	}
 	
 	@Override
