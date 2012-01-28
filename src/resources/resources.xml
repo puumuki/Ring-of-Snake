@@ -23,6 +23,9 @@
 	<resource type="sound" id="SQUIRREL_VOICE_3">resources\sounds\squirrel_voice3.wav</resource>
 	<resource type="sound" id="SQUIRREL_VOICE_4">resources\sounds\squirrel_voice4.wav</resource>
 
+<!-- OBJECTS -->
+	<resource type="image" id="BOX">resources\objects\Farm-Fresh_box.png</resource>
+
 <!-- Main Menu -->
 	<resource type="sound" id="MENU_CLICK_SOUND">resources\sounds\menu.wav</resource>
 	<resource type="image" id="MENU_BG">resources\ui\snakeStartScreen_ringless_versio_2.png</resource>
