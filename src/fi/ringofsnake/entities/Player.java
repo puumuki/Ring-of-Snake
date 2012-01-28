@@ -16,19 +16,22 @@ import fi.ringofsnake.io.ResourceManager;
 
 public class Player extends AEntity {
 
-	// quick hack, ei n�in
-	private Image playerImg;
 	private Animation running;
 	
-	private float maxSpeed = 0.4f;
+	// quick hack, ei näin
+	private Image playerImg;
+	
+	private float maxSpeed = 1.0f;
 	
 	// FIXME
 	private int floorlevel = 350;
 	
 	private boolean descending = false;
-	
-	private static final float padScaling = 0.05f;
+
+	private static final float padScaling = 0.5f;
 	private static final float deadZone = 0.05f;
+	
+	private float gravity = 0.5f;
 	
 	JoystickListener listener;
 	
@@ -39,8 +42,6 @@ public class Player extends AEntity {
 		position = new Vector2f(10, floorlevel);
 		velocity = new Vector2f();
 		
-		// TODO: shouldn't friction be defined according to the location of the player and not according to his own stats?
-		friction = 0.99f;
 
 		playerImg = ResourceManager.fetchImage("PLAYER");
 		running = ResourceManager.fetchAnimation("CAT_RUN");
@@ -74,9 +75,10 @@ public class Player extends AEntity {
 		Input input = cont.getInput();
 		
 		updateMovement(input, delta);
-		
+		/*
 		position.x += velocity.x * delta;
 		position.y += velocity.y * delta;
+		*/
 	}
 
 	/**
@@ -88,21 +90,24 @@ public class Player extends AEntity {
 				
 		float x = 0;
 		float y = 0;
-		
-		
-		
-		if( input.isKeyDown(Input.KEY_LEFT) || input.isControllerLeft(Input.ANY_CONTROLLER)) {
-			x = -0.1f;
+
+
+		if ( input.isKeyDown(Input.KEY_LEFT) || input.isControllerLeft(Input.ANY_CONTROLLER)) {
+			if(velocity.x > -maxSpeed)
+				x = -0.1f;
 		}
-		if( input.isKeyDown(Input.KEY_RIGHT) || input.isControllerRight(Input.ANY_CONTROLLER)) {
-			x = 0.1f;		
+		if ( input.isKeyDown(Input.KEY_RIGHT) || input.isControllerRight(Input.ANY_CONTROLLER)) {
+			if(velocity.x < maxSpeed)
+				x = 0.1f;
 		}
-		if( input.isKeyDown(Input.KEY_UP) || input.isButton1Pressed(Input.ANY_CONTROLLER)) {
-			y -= 0.1f;
+		if ( input.isKeyDown(Input.KEY_UP) || input.isButton1Pressed(Input.ANY_CONTROLLER)) {
+			y -= 0.1f; 
 		}
+		/*
 		if( input.isKeyDown(Input.KEY_DOWN)) {
 			y += 0.1f;
 		}
+		*/
 				
 		velocity.x += x * padScaling;
 		velocity.y += y * padScaling;
