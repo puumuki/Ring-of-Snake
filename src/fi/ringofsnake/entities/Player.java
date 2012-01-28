@@ -14,7 +14,7 @@ import fi.ringofsnake.io.ResourceManager;
 
 public class Player extends AEntity {
 
-	// quick hack, ei näin
+	// quick hack, ei nï¿½in
 	private Image playerImg;
 	
 	private float maxSpeed = 0.4f;
@@ -77,6 +77,7 @@ public class Player extends AEntity {
 	 */
 	private void updateMovement(Input input, int delta) {
 		
+		//FIXME
 		float x = input.getAxisValue(3, 1);
 		float y = input.getAxisValue(3, 0);
 

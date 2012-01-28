@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
-	<!-- SNAKE -->
+<!-- SNAKE -->
 	<resource type="image" id="SNAKE_BODY_UPPER">resources\snake\body_up_placeholder.png</resource>
 	<resource type="image" id="SNAKE_BODY">resources\snake\body_placeholder.png</resource>
 	<resource type="image" id="SNAKE_BODY_LOWER">resources\snake\body_down_placeholder.png</resource>
 	
-	<!-- PLAYER -->
+<!-- PLAYER -->
 	<resource type="image" id="PLAYER">resources\player\player_placeholder.png</resource>
 
-	<!-- Main Menu -->
+<!-- Main Menu -->
 	<resource type="sound" id="MENU_CLICK_SOUND">resources\sounds\menu.wav</resource>
 
-	<!-- TILES -->	
+<!-- TILES -->	
 	<resource type="image" id="TILE_SPACE">resources\tiles\space.png</resource>	
 
 </resources>

@@ -8,20 +8,21 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import fi.ringofsnake.entities.Player;
 import fi.ringofsnake.main.Main;
 import fi.ringofsnake.entities.SnakeMap;
 import fi.ringofsnake.io.ResourceManager;
-import fi.ringofsnake.entities.Player;
 
 public class PlayGameState extends BasicGameState {
 
 	private int stateID = -1;
-	
+
+	private Player player;
+
 	private Image snakeUpper;
 	private Image snakeBody;
 	private Image snakeLower;
 	
-	private Player player;
 	private SnakeMap current_map = null;
 	
 	private float[] offset = {0.0f, 0.0f};
@@ -36,13 +37,14 @@ public class PlayGameState extends BasicGameState {
 	{
 		player = new Player();
 
+		current_map = new SnakeMap();
+		
 		snakeUpper = current_map.getTile('^').getImage();
 		snakeBody  = current_map.getTile('|').getImage();
 		snakeLower = current_map.getTile('v').getImage();
 		
-		current_map = new SnakeMap();
-		
 	}
+	
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException 
@@ -81,7 +83,7 @@ public class PlayGameState extends BasicGameState {
 
 		Input input = container.getInput();
 		player.update(container, delta);
-		
+
 		if(input.isKeyPressed(Input.KEY_PAUSE ) || input.isKeyPressed(Input.KEY_ESCAPE)) {
 			game.enterState(Main.MAINMENU_GAME_STATE);
 		}
@@ -92,6 +94,7 @@ public class PlayGameState extends BasicGameState {
 		offset[0] = ((offset[0]+step)%mod); 
 		offset[1] = ((offset[1]+step)%mod);
 	}
+	
 	@Override
 	public int getID() {
 		return stateID;
