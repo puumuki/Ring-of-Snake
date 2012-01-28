@@ -1,30 +1,26 @@
+
 package fi.ringofsnake.entities;
 
-import org.lwjgl.input.Controller;
-import org.lwjgl.input.Controllers;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
+import org.newdawn.slick.Sound;
+
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
-import org.newdawn.slick.util.Log;
 
-import fi.ringofsnake.controllers.JoystickListener;
 import fi.ringofsnake.io.ResourceManager;
 import fi.ringofsnake.util.Impulse;
 
 public class Player extends AEntity {
-
-	private Rectangle hitBox;
-	
+		
 	private Animation running;
 	private Animation jumping;
 	
 	private Sound[] voices;
+
 	
 	private Impulse jumpImpulse;
 	
@@ -53,11 +49,19 @@ public class Player extends AEntity {
 		
 		running = ResourceManager.fetchAnimation("CAT_RUN");
 		jumping = ResourceManager.fetchAnimation("CAT_JUMP");
+
+		voices = new Sound[] {ResourceManager.fetchSound("CAT_1"), ResourceManager.fetchSound("CAT_2"),
+				ResourceManager.fetchSound("CAT_3"), ResourceManager.fetchSound("CAT_4")};
+		
 		width = running.getWidth();
 		height = running.getHeight();
 		
-		voices = new Sound[] {ResourceManager.fetchSound("CAT_1"), ResourceManager.fetchSound("CAT_2"),
-				ResourceManager.fetchSound("CAT_3"), ResourceManager.fetchSound("CAT_4")};
+		shape = new Rectangle(position.x, 
+							  position.y, 
+							  jumping.getWidth(), 
+							  jumping.getHeight() );
+		
+		Input.disableControllers();
 	}
 	
 	/**
@@ -88,7 +92,10 @@ public class Player extends AEntity {
 	public void update(GameContainer cont, int delta) throws SlickException {		
 		Input input = cont.getInput();
 		updateMovement(input, delta);
+		updateHitbox();
 		
+
+
 		boolean playing = false;
 		for (Sound voice : voices) {
 			if (voice.playing())
@@ -100,6 +107,11 @@ public class Player extends AEntity {
 		}
 	}
 
+	private void updateHitbox() {
+		shape.setX( this.position.x );
+		shape.setY( this.position.y );
+	}
+	
 	/**
 	 * Updates the movement of the player.
 	 * @param input mouse, keyboard and controller input wrapper
@@ -110,7 +122,7 @@ public class Player extends AEntity {
 		float x = 0;
 		float y = 0;
 
-		if ( input.isKeyDown(Input.KEY_LEFT) || input.isControllerLeft(Input.ANY_CONTROLLER) ) {
+		if ( input.isKeyDown(Input.KEY_LEFT) ) {
 			if(velocity.x > -maxSpeed)
 				x = -0.01f;
 
@@ -123,11 +135,6 @@ public class Player extends AEntity {
 		if ( (input.isKeyPressed(Input.KEY_UP) || input.isButton1Pressed(Input.ANY_CONTROLLER)) && touchingLand() ) {
 			jumpImpulse.launch(0.2f, new Vector2f(0,-0.08f));
 		}
-		/*
-		if( input.isKeyDown(Input.KEY_DOWN)) {
-			y += 0.1f;
-		}
-		*/
 				
 		velocity.x += gravity.x;
 		velocity.y += gravity.y;
@@ -165,13 +172,5 @@ public class Player extends AEntity {
 	
 	public int getHeight() {
 		return height;
-	}
-	
-	@Override
-	public boolean colliding(AEntity entity) {
-		return false;	
-		
-		
-		
 	}
 }

@@ -1,3 +1,4 @@
+
 package fi.ringofsnake.gamestates;
 
 import org.newdawn.slick.Color;
@@ -42,7 +43,7 @@ public class PlayGameState extends BasicGameState {
 	}
 
 	private float tunnelHorizontalOffset = 0;	
-	private float tunnelSpeed = 0.1f;
+	private float tunnelSpeed = 0.5f;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -84,14 +85,13 @@ public class PlayGameState extends BasicGameState {
 		
 		//This moves the map position relative to cat
 		g.translate( (int)-(player.position.x + tunnelHorizontalOffset), 
-						  -container.getHeight()/2 - 80 );
+						  -container.getHeight()/2 - 180 );
 		
 		currentMap.render(container, g);		
 		g.resetTransform();	
 		
-		g.translate( (int)player.position.x - 300, (int) player.position.y - 400);
-		squirrels.render(container, g);
-		g.resetTransform();
+		
+		squirrels.render(container, g);		
 		
 		// just for now
 		player.render(container, g);
