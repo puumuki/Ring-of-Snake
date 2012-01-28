@@ -84,7 +84,7 @@ public class PlayGameState extends BasicGameState {
 		
 		//This moves the map position relative to cat
 		g.translate( (int)-(player.position.x + tunnelHorizontalOffset), 
-						  -container.getHeight()/2 - 180 );
+						  -container.getHeight()/2 - 80 );
 		
 		currentMap.render(container, g);		
 		g.resetTransform();	

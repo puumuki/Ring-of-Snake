@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.util.Log;
@@ -22,6 +23,8 @@ public class Player extends AEntity {
 	
 	private Animation running;
 	private Animation jumping;
+	
+	private Sound[] voices;
 	
 	private Impulse jumpImpulse;
 	
@@ -52,6 +55,9 @@ public class Player extends AEntity {
 		jumping = ResourceManager.fetchAnimation("CAT_JUMP");
 		width = running.getWidth();
 		height = running.getHeight();
+		
+		voices = new Sound[] {ResourceManager.fetchSound("CAT_1"), ResourceManager.fetchSound("CAT_2"),
+				ResourceManager.fetchSound("CAT_3"), ResourceManager.fetchSound("CAT_4")};
 	}
 	
 	/**
@@ -82,6 +88,16 @@ public class Player extends AEntity {
 	public void update(GameContainer cont, int delta) throws SlickException {		
 		Input input = cont.getInput();
 		updateMovement(input, delta);
+		
+		boolean playing = false;
+		for (Sound voice : voices) {
+			if (voice.playing())
+				playing = true;
+		}
+		if (!playing && Math.random() > 0.995) {
+			int whichToPlay = (int)(Math.random() * voices.length);
+			voices[whichToPlay].play();
+		}
 	}
 
 	/**

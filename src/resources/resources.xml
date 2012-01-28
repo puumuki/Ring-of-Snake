@@ -6,10 +6,22 @@
 	<resource type="animation" id="CAT_RUN" tw="256" th="128" duration="100">resources\player\cat_run.png</resource>
 	<resource type="animation" id="CAT_JUMP" tw="256" th="128" duration="100">resources\player\cat_jump.png</resource>
 	
+	<resource type="sound" id="CAT_1">resources\sounds\cat_1.wav</resource>
+	<resource type="sound" id="CAT_2">resources\sounds\cat_2.wav</resource>
+	<resource type="sound" id="CAT_3">resources\sounds\cat_3.wav</resource>
+	<resource type="sound" id="CAT_4">resources\sounds\cat_4.wav</resource>
+	
 <!-- MOBS -->
 	<resource type="animation" id="SQUIRREL_RUN" tw="256" th="128" duration="100">resources\squirrel\squirrel_running.png</resource>
 	<resource type="animation" id="SQUIRREL_RUN2" tw="256" th="128" duration="100">resources\squirrel\squirrel_running_2.png</resource>
 	<resource type="sound" id="SQUIRRELS_RUNNING">resources\sounds\squirrel_running.wav</resource>
+	
+	<resource type="sound" id="SQUIRREL_CHIRP_1">resources\sounds\squirrel_chirp1.wav</resource>
+	<resource type="sound" id="SQUIRREL_CHIRP_2">resources\sounds\squirrel_chirp2.wav</resource>
+	<resource type="sound" id="SQUIRREL_VOICE_1">resources\sounds\squirrel_voice1.wav</resource>
+	<resource type="sound" id="SQUIRREL_VOICE_2">resources\sounds\squirrel_voice2.wav</resource>
+	<resource type="sound" id="SQUIRREL_VOICE_3">resources\sounds\squirrel_voice3.wav</resource>
+	<resource type="sound" id="SQUIRREL_VOICE_4">resources\sounds\squirrel_voice4.wav</resource>
 
 <!-- Main Menu -->
 	<resource type="sound" id="MENU_CLICK_SOUND">resources\sounds\menu.wav</resource>
