@@ -2,6 +2,7 @@ package fi.ringofsnake.entities;
 
 import org.lwjgl.input.Controller;
 import org.lwjgl.input.Controllers;
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -17,6 +18,7 @@ public class Player extends AEntity {
 
 	// quick hack, ei n�in
 	private Image playerImg;
+	private Animation running;
 	
 	private float maxSpeed = 0.4f;
 	
@@ -41,6 +43,7 @@ public class Player extends AEntity {
 		friction = 0.99f;
 
 		playerImg = ResourceManager.fetchImage("PLAYER");
+		running = ResourceManager.fetchAnimation("CAT_RUN");
 		
 		listener = new JoystickListener(this);
 		cont.getInput().addControllerListener(listener);
@@ -53,7 +56,7 @@ public class Player extends AEntity {
 	 */
 	@Override
 	public void render(GameContainer cont, Graphics grap) throws SlickException {
-		grap.drawImage(playerImg, position.x, position.y);
+		grap.drawAnimation(running, position.x, position.y);
 		grap.drawString("vX " + velocity.x, 300, 550);
 		grap.drawString("vY " + velocity.y, 300, 570);
 		grap.drawString("pX " + position.x, 10, 550);

@@ -82,7 +82,7 @@ public class PlayGameState extends BasicGameState {
 		g.drawImage(snakeLower, x, y + snakeUpper.getHeight() + snakeBody.getHeight());
 
 		// just for now
-		g.fillRect(0, 30, 800, 500);
+		//g.fillRect(0, 30, 800, 500);
 		player.render(container, g);
 
 	}

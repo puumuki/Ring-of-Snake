@@ -9,6 +9,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.util.Log;
 
 public class ImageMenuItem implements IMenuItem {
 
@@ -20,7 +21,7 @@ public class ImageMenuItem implements IMenuItem {
 		
 	public static final float MAX_SIZE = 0.1f;
 	
-	private static final Color filterColor = new Color(1f,1f,1f,0.8f);
+	private static final Color filterColor = new Color(1f,1f,1f,0.5f);
 	
 	public boolean isActive = false;
 	
@@ -43,11 +44,11 @@ public class ImageMenuItem implements IMenuItem {
 	}
 
 	@Override
-	public void render(GameContainer cont, Graphics g) throws SlickException {		
+	public void render(GameContainer cont, Graphics g) throws SlickException {
 		if( isActive )
-			menuImage.draw(point.x, point.y, scale);
+			menuImage.draw(point.x - ((menuImage.getWidth() / 2 * scale) - (menuImage.getWidth() / 2)), point.y, scale);
 		else {
-			menuImage.draw(point.x, point.y, scale, filterColor);
+			menuImage.draw(point.x - ((menuImage.getWidth() / 2 * scale) - (menuImage.getWidth() / 2)), point.y, scale, filterColor);
 		}
 	}
 

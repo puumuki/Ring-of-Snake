@@ -34,6 +34,8 @@ public class MainMenuGameState extends BasicGameState {
 		
 		private Image menuBg;
 		
+		private Image rinkula;
+		
 		public MainMenuGameState(int stateID) {
 			this.stateID = stateID;
 		}
@@ -44,21 +46,22 @@ public class MainMenuGameState extends BasicGameState {
 			initMainMenu( container );
 			
 			menuBg = ResourceManager.fetchImage("MENU_BG");
+			rinkula = ResourceManager.fetchImage("MENU_RING");
 		}
 		
 		private void initMainMenu( GameContainer cont ) throws SlickException {
 			mainmenu = new Menu();
 			
-			int xOffset = cont.getWidth() / 3 + 100;
-			int yOffset = cont.getHeight() / 3 + 40;
+			int xOffset = cont.getWidth() / 2 - 145;
+			int yOffset = cont.getHeight() / 3 + 60;
 			
 			ImageMenuItem playItem = new ImageMenuItem( new Point(xOffset, yOffset), 
 														ResourceManager.fetchImage("MENU_BUTTON_PLAY"));
 			
-			ImageMenuItem infoItem = new ImageMenuItem( new Point(xOffset, yOffset + 120), 
+			ImageMenuItem infoItem = new ImageMenuItem( new Point(cont.getWidth() / 2 - 143, yOffset + 120), 
 														ResourceManager.fetchImage("MENU_BUTTON_IFNO"));
 						
-			ImageMenuItem quitItem = new ImageMenuItem( new Point(xOffset, yOffset + 210), 
+			ImageMenuItem quitItem = new ImageMenuItem( new Point(cont.getWidth() / 2 - 135, yOffset + 210), 
 														ResourceManager.fetchImage("MENU_BUTTON_QUIT"));
 
 			mainmenu.add("play", playItem);
@@ -74,6 +77,7 @@ public class MainMenuGameState extends BasicGameState {
 						  Graphics g) throws SlickException {
 			
 			menuBg.draw();
+			rinkula.draw(610 - rinkula.getWidth() / 2, 450 - rinkula.getHeight()/2);
 			
 			for( AEntity entity : entities ) {
 				entity.render(container, g);
@@ -86,14 +90,16 @@ public class MainMenuGameState extends BasicGameState {
 						   StateBasedGame game, 
 						   int delta)	throws SlickException {
 
+			rinkula.rotate(0.01f*delta);
+			
 			for (AEntity entity : entities) {
 				entity.update(container, delta);
 			}			
 
 			Input input =container.getInput();
 			
-			FadeInTransition in = new FadeInTransition(Color.white);
-			FadeOutTransition out = new FadeOutTransition(Color.white);
+			FadeOutTransition in = new FadeOutTransition(Color.white);
+			FadeInTransition out = new FadeInTransition(Color.white);
 			
 			if(input.isKeyPressed(Input.KEY_ENTER)) {
 				if( mainmenu.isActiveIndex("play") ) {
