@@ -10,6 +10,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fi.ringofsnake.main.Main;
+import fi.ringofsnake.entities.ScrollingBackGround;
 import fi.ringofsnake.entities.SnakeMap;
 import fi.ringofsnake.entities.Tile;
 import fi.ringofsnake.io.ResourceManager;
@@ -24,6 +25,8 @@ public class PlayGameState extends BasicGameState {
 
 	private float[] offset = { 0.0f, 0.0f };
 
+	private ScrollingBackGround scrollingBackGround;
+	
 	private Music gamePlayMusic;
 	
 	public PlayGameState(int stateID) {
@@ -43,6 +46,7 @@ public class PlayGameState extends BasicGameState {
 		player = new Player(container);
 		gamePlayMusic = ResourceManager.fetchMusic("GAMEPLAY_BG_MUSIC");
 		gamePlayMusic.loop();
+		scrollingBackGround = new ScrollingBackGround(0.5f);
 	}
 
 	@Override
@@ -66,6 +70,8 @@ public class PlayGameState extends BasicGameState {
 			throws SlickException {
 		// TODO read map
 
+		scrollingBackGround.render(container, g);
+		
 		//This moves the map position relative to cat
 		g.translate( (int)-player.position.x, (int) -player.position.y - 180 );
 		currentMap.render(container, g);
@@ -101,5 +107,7 @@ public class PlayGameState extends BasicGameState {
 		//This adjust cat / player position relative to the screen
 		player.cameraOffsetX = container.getWidth() / 3 - player.getWidth();
 		player.cameraOffsetY = container.getHeight() / 2 ;
+		
+		scrollingBackGround.update(container, delta);
 	}
 }

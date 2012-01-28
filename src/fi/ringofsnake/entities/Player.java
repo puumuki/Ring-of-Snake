@@ -101,7 +101,6 @@ public class Player extends AEntity {
 			if(velocity.x < maxSpeed)
 				x = 0.01f;
 		}
-		System.out.println( jumpImpulse.isAffecting());
 		
 		if ( input.isKeyPressed(Input.KEY_UP) && touchingLand() ) {
 			jumpImpulse.launch(0.2f, new Vector2f(0,-0.08f));
