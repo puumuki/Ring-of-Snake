@@ -52,9 +52,9 @@ public class SquirrelMob extends AEntity {
 	}
 
 	@Override
-	public boolean collaiding(AEntity entity) {		
+	public boolean colliding(AEntity entity) {		
 		for (Squirrel s : squirrels) {
-			if( s.collaiding(entity) ) {
+			if( s.colliding(entity) ) {
 				return true;
 			}				
 		}

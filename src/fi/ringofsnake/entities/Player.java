@@ -51,6 +51,8 @@ public class Player extends AEntity {
 							  position.y, 
 							  jumping.getWidth(), 
 							  jumping.getHeight() );
+		
+		Input.disableControllers();
 	}
 	
 	/**
@@ -99,7 +101,7 @@ public class Player extends AEntity {
 		float x = 0;
 		float y = 0;
 
-		if ( input.isKeyDown(Input.KEY_LEFT) || input.isControllerLeft(Input.ANY_CONTROLLER) ) {
+		if ( input.isKeyDown(Input.KEY_LEFT) ) {
 			if(velocity.x > -maxSpeed)
 				x = -0.01f;
 
