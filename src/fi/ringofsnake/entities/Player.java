@@ -18,8 +18,7 @@ import fi.ringofsnake.util.Impulse;
 public class Player extends AEntity {
 
 	private Animation running;
-
-	// quick hack, ei näin
+	private Animation jumping;
 	
 	private Impulse jumpImpulse;
 	
@@ -28,7 +27,7 @@ public class Player extends AEntity {
 	// FIXME
 	private int floorlevel = 350;
 	
-	private Vector2f grafity = new Vector2f(0.000f, 0.01f);
+	private Vector2f gravity = new Vector2f(0.000f, 0.01f);
 	
 	private static final float padScaling = 0.5f;
 	private static final float deadZone = 0.05f;
@@ -39,7 +38,7 @@ public class Player extends AEntity {
 	 * Creates a new player.
 	 */
 	public Player( GameContainer cont ) {
-		position = new Vector2f(10, floorlevel);
+		position = new Vector2f(200, floorlevel);
 		velocity = new Vector2f();
 		
 		friction = 0.98f;		
@@ -50,6 +49,7 @@ public class Player extends AEntity {
 		jumpImpulse = new Impulse(0, new Vector2f(0.0f, 0.0f), this );
 		
 		running = ResourceManager.fetchAnimation("CAT_RUN");
+		jumping = ResourceManager.fetchAnimation("CAT_JUMP");
 	}
 	
 	/**
@@ -59,7 +59,10 @@ public class Player extends AEntity {
 	 */
 	@Override
 	public void render(GameContainer cont, Graphics grap) throws SlickException {
-		grap.drawAnimation(running, position.x, position.y);
+		if(isJumping())
+			grap.drawAnimation(jumping, position.x, position.y);
+		else
+			grap.drawAnimation(running, position.x, position.y);
 		grap.drawString("vX " + velocity.x, 300, 550);
 		grap.drawString("vY " + velocity.y, 300, 570);
 		grap.drawString("pX " + position.x, 10, 550);
@@ -96,7 +99,7 @@ public class Player extends AEntity {
 			if(velocity.x < maxSpeed)
 				x = 0.01f;
 		}
-		System.out.println( jumpImpulse.isAffecting());
+		//System.out.println( jumpImpulse.isAffecting());
 		
 		if ( input.isKeyPressed(Input.KEY_UP) && touchingLand() ) {
 			jumpImpulse.launch(0.2f, new Vector2f(0,-0.08f));
@@ -107,8 +110,8 @@ public class Player extends AEntity {
 		}
 		*/
 				
-		velocity.x += grafity.x;
-		velocity.y += grafity.y;
+		velocity.x += gravity.x;
+		velocity.y += gravity.y;
 		
 		velocity.x += x;
 		velocity.y += y;
@@ -121,13 +124,17 @@ public class Player extends AEntity {
 		position.y += velocity.y * delta;
 		
 		if( touchingLand() ) {
-			position.y = 350;
+			position.y = floorlevel;
 		}
 		
 		jumpImpulse.update(delta);
 	}
 	
 	private boolean touchingLand() {
-		return position.y >= 350;
+		return position.y >= floorlevel;
+	}
+	
+	private boolean isJumping() {
+		return !touchingLand();
 	}
 }

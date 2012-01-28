@@ -4,6 +4,7 @@
 <!-- PLAYER -->
 	<resource type="image" id="PLAYER">resources\player\player_placeholder.png</resource>
 	<resource type="animation" id="CAT_RUN" tw="256" th="128" duration="100">resources\player\cat_run.png</resource>
+	<resource type="animation" id="CAT_JUMP" tw="256" th="128" duration="100">resources\player\cat_jump.png</resource>
 	
 <!-- MOBS -->
 	<resource type="animation" id="SQUIRREL_RUN" tw="256" th="128" duration="100">resources\squirrel\squirrel_running.png</resource>
