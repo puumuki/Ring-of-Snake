@@ -15,7 +15,7 @@ import fi.ringofsnake.io.ResourceManager;
 
 public class Player extends AEntity {
 
-	// quick hack, ei n�in
+	// quick hack, ei nin
 	private Image playerImg;
 	
 	private float maxSpeed = 0.4f;
@@ -83,9 +83,6 @@ public class Player extends AEntity {
 	 */
 	private void updateMovement(Input input, int delta) {
 				
-		float x = 0;
-		float y = 0;
-		
 		//FIXME
 		float x = 0.0f;		//input.getAxisValue(3, 1);
 		float y = 0.0f;		//input.getAxisValue(3, 0);
@@ -93,6 +90,7 @@ public class Player extends AEntity {
 		if (Math.abs(x) > deadZone || Math.abs(y) > deadZone) {
 			velocity.x += x * padScaling;
 			velocity.y += y * padScaling;
+		}
 		if( input.isKeyDown(Input.KEY_LEFT) || input.isControllerLeft(Input.ANY_CONTROLLER)) {
 			x = -0.1f;
 		}

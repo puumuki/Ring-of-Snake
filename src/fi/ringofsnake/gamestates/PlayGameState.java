@@ -35,7 +35,7 @@ public class PlayGameState extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game)			
 			throws SlickException 
 	{
-		player = new Player();
+		player = new Player(container);
 		
 		currentMap = new SnakeMap();
 		player = new Player(container);		
@@ -46,23 +46,23 @@ public class PlayGameState extends BasicGameState {
 			throws SlickException 
 	{
 		//TODO read map
-		Image tile = currentMap.getTile(0, 0).getImage();
+		Tile tile = currentMap.getTile(0, 0);
 		Image snakeUpper = currentMap.getTile('^').getImage();
 		Image snakeBody  = currentMap.getTile('|').getImage();
 		Image snakeLower = currentMap.getTile('v').getImage();
-
-		assert(tile.getWidth() > 0 && tile.getHeight() > 0);
 		
 		//Background
-		for (int i = -1, n = container.getScreenWidth()/tile.getWidth() + 1; 
+		for (int i = -1, n = container.getScreenWidth()/tile.getImage().getWidth() + 1; 
 			 i < n; 
 			 i++) 
 		{
-			for (int j = -1, m = container.getScreenWidth()/tile.getWidth() + 1; 
+			for (int j = -1, m = container.getScreenWidth()/tile.getImage().getWidth() + 1; 
 					 j < m; 
 					 j++) 
 			{ 
-				g.drawImage(tile, i*tile.getWidth() + offset[0], j*tile.getHeight() + offset[1]);
+				//g.drawImage(tile.getImage(), i*tile.getWidth() + offset[0], j*tile.getHeight() + offset[1]);
+				tile.render(g, (int)(i*tile.getImage().getWidth() + offset[0]), 
+							   (int)(j*tile.getImage().getHeight() + offset[1]), i%2==1, j%2==1);
 			}
 		}
 		
