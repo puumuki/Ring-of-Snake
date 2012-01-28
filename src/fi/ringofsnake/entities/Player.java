@@ -15,7 +15,9 @@ import fi.ringofsnake.io.ResourceManager;
 
 public class Player extends AEntity {
 
+
 	// quick hack, ei näin
+
 	private Image playerImg;
 	
 	private float maxSpeed = 1.0f;
@@ -84,13 +86,14 @@ public class Player extends AEntity {
 	 * @param delta
 	 */
 	private void updateMovement(Input input, int delta) {
-				
+
 		float x = 0;
 		float y = 0;
 
 		if ( input.isKeyDown(Input.KEY_LEFT) ) {
 			if(velocity.x > -maxSpeed)
 				x = -0.01f;
+
 		}
 		if ( input.isKeyDown(Input.KEY_RIGHT)) {
 			if(velocity.x < maxSpeed)
