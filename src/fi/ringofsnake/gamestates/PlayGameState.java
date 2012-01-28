@@ -59,7 +59,7 @@ public class PlayGameState extends BasicGameState {
 	@Override
 	public void enter(GameContainer container, StateBasedGame game)
 			throws SlickException {
-	
+		
 		super.enter(container, game);
 		gamePlayMusic.loop();	
 	}
@@ -70,6 +70,7 @@ public class PlayGameState extends BasicGameState {
 
 		super.leave(container, game);
 		gamePlayMusic.stop();
+		squirrels.stop();
 	}
 	
 	@Override
@@ -80,15 +81,19 @@ public class PlayGameState extends BasicGameState {
 		scrollingBackGround.render(container, g);
 		
 		//This moves the map position relative to cat
-		g.translate( (int)-player.position.x, (int) -player.position.y - 180 );
+		g.translate( (int)-player.position.x, (int) -player.position.y + 20 );
 		currentMap.render(container, g);
+		g.resetTransform();
+		
+		g.translate( (int)player.position.x - 300, (int) player.position.y - 400);
+		squirrels.render(container, g);
 		g.resetTransform();
 		
 		// just for now
 		player.render(container, g);
-		
+
+
 		//Draw scores and other things here. Bitch.
-		squirrels.render(container, g);
 		
 		drawDebugLines( container, g );
 	}

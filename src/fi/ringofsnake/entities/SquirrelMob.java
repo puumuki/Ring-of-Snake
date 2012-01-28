@@ -56,4 +56,7 @@ public class SquirrelMob extends AEntity {
 
 	}
 
+	public void stop() {
+		runningSound.stop();
+	}
 }
