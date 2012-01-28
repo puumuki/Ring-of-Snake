@@ -33,6 +33,7 @@ public class InfoGameState extends BasicGameState {
 				"Music: Ruulanko by Sami Juntunen (mutetus)\n\n" +
 				"Other credits\n" +
 				"http://commons.wikimedia.org/wiki/File:2008-09-15_(14)_Grass,_Gras.JPG by Vera Buhl, CC-BY-SA\n" +
+				"http://www.freesound.org/people/dobroide/sounds/41180/ by dobroide, CC-BY\n" +
 				"\n\nPress enter to continue.", 20, 20);
 		
 	}
