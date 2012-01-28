@@ -1,5 +1,6 @@
 package fi.ringofsnake.entities;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -13,8 +14,11 @@ import org.newdawn.slick.geom.Vector2f;
  */
 public abstract class AEntity implements Comparable<AEntity>, IGameObject {
 	
+	/**
+	 * Hitbox
+	 */
 	protected Shape shape;
-	
+		
 	/**
 	 * Entity position
 	 */
@@ -78,9 +82,9 @@ public abstract class AEntity implements Comparable<AEntity>, IGameObject {
 	
 	public boolean colliding( AEntity entity ) {
 		
-		if( shape != null && entity.shape != null ) {
-			return shape.contains(shape);
-		}
+		if( shape != null && entity.shape != null ) {			
+			return shape.intersects(entity.shape);			
+		}		
 		
 		return false;
 	}

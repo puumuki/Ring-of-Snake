@@ -1,5 +1,6 @@
 package fi.ringofsnake.entities;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -19,7 +20,7 @@ public class SquirrelMob extends AEntity {
 	
 	private Sound[] chirps;
 	
-	private static final int SQUIRREL_COUNT = 40;
+	private static final int SQUIRREL_COUNT = 20;
 	
 	public SquirrelMob() {
 		
@@ -63,7 +64,7 @@ public class SquirrelMob extends AEntity {
 	@Override
 	public boolean colliding(AEntity entity) {		
 		for (Squirrel s : squirrels) {
-			if( s.colliding(entity) ) {
+			if(s.colliding(entity) ) {						
 				return true;
 			}				
 		}

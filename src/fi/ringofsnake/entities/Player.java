@@ -20,7 +20,6 @@ public class Player extends AEntity {
 	private Animation jumping;
 	
 	private Sound[] voices;
-
 	
 	private Impulse jumpImpulse;
 	
@@ -81,6 +80,8 @@ public class Player extends AEntity {
 		grap.drawString("vY " + velocity.y, 300, 570);
 		grap.drawString("pX " + position.x, 10, 550);
 		grap.drawString("pY " + position.y, 10, 570);
+				
+		grap.draw(shape);
 	}
 
 	/**
@@ -108,8 +109,7 @@ public class Player extends AEntity {
 	}
 
 	private void updateHitbox() {
-		shape.setX( this.position.x );
-		shape.setY( this.position.y );
+		shape.setLocation(this.position.x, this.position.y);		
 	}
 	
 	/**
@@ -153,7 +153,7 @@ public class Player extends AEntity {
 			position.y = floorlevel;
 		}
 		
-		jumpImpulse.update(delta);
+		jumpImpulse.update(delta);		
 		
 		running.setSpeed( Math.abs(velocity.length() / 10 * delta) );
 	}

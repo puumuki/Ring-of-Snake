@@ -23,7 +23,8 @@
 	<resource type="sound" id="SQUIRREL_VOICE_3">resources\sounds\squirrel_voice3.wav</resource>
 	<resource type="sound" id="SQUIRREL_VOICE_4">resources\sounds\squirrel_voice4.wav</resource>
 
-<!-- OBJECTS -->
+
+	<!-- OBJECTS -->
 	<resource type="image" id="BOX">resources\objects\Farm-Fresh_box.png</resource>
 	<resource type="image" id="GOO">resources\objects\lima.png</resource>
 
