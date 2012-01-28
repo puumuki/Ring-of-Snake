@@ -29,15 +29,14 @@ public class Squirrel extends AEntity {
 	}
 	
 	@Override
-	public void render(GameContainer cont, Graphics grap) throws SlickException {
-		
+	public void render(GameContainer cont, Graphics grap) throws SlickException {		
 		grap.drawAnimation(running, position.x, position.y);
+		grap.draw(shape);
 	}
 
 	@Override
 	public void update(GameContainer cont, int delta) throws SlickException {
-		// TODO Auto-generated method stub
-
+		this.shape.setLocation(position.x, position.y);
 	}
 
 }

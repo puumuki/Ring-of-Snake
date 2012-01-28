@@ -1,3 +1,4 @@
+
 package fi.ringofsnake.gamestates;
 
 import org.newdawn.slick.Color;
@@ -84,7 +85,7 @@ public class PlayGameState extends BasicGameState {
 		
 		//This moves the map position relative to cat
 		g.translate( (int)-(player.position.x + tunnelHorizontalOffset), 
-						  -container.getHeight()/2 - 180 );
+						  -container.getHeight()/2 - 80 );
 		
 		currentMap.render(container, g);		
 		g.resetTransform();	
@@ -113,11 +114,14 @@ public class PlayGameState extends BasicGameState {
 	
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)		throws SlickException {
+		
 		squirrels.update(container, delta);
-		//player.update(container, delta);
-		Input input = container.getInput();
 		player.update(container, delta);
-
+				
+		
+		
+		Input input = container.getInput();
+		
 		if (input.isKeyPressed(Input.KEY_PAUSE)	|| input.isKeyPressed(Input.KEY_ESCAPE)) {
 			game.enterState(Main.MAINMENU_GAME_STATE);
 		}

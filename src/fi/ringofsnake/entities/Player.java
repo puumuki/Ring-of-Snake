@@ -1,8 +1,10 @@
+
 package fi.ringofsnake.entities;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Sound;
 
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -16,6 +18,9 @@ public class Player extends AEntity {
 		
 	private Animation running;
 	private Animation jumping;
+	
+	private Sound[] voices;
+
 	
 	private Impulse jumpImpulse;
 	
@@ -44,6 +49,10 @@ public class Player extends AEntity {
 		
 		running = ResourceManager.fetchAnimation("CAT_RUN");
 		jumping = ResourceManager.fetchAnimation("CAT_JUMP");
+
+		voices = new Sound[] {ResourceManager.fetchSound("CAT_1"), ResourceManager.fetchSound("CAT_2"),
+				ResourceManager.fetchSound("CAT_3"), ResourceManager.fetchSound("CAT_4")};
+		
 		width = running.getWidth();
 		height = running.getHeight();
 		
@@ -72,6 +81,8 @@ public class Player extends AEntity {
 		grap.drawString("vY " + velocity.y, 300, 570);
 		grap.drawString("pX " + position.x, 10, 550);
 		grap.drawString("pY " + position.y, 10, 570);
+				
+		grap.draw(shape);
 	}
 
 	/**
@@ -84,11 +95,22 @@ public class Player extends AEntity {
 		Input input = cont.getInput();
 		updateMovement(input, delta);
 		updateHitbox();
+		
+
+
+		boolean playing = false;
+		for (Sound voice : voices) {
+			if (voice.playing())
+				playing = true;
+		}
+		if (!playing && Math.random() > 0.995) {
+			int whichToPlay = (int)(Math.random() * voices.length);
+			voices[whichToPlay].play();
+		}
 	}
 
 	private void updateHitbox() {
-		shape.setX( this.position.x );
-		shape.setY( this.position.y );
+		shape.setLocation(this.position.x, this.position.y);		
 	}
 	
 	/**
