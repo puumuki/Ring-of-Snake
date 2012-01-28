@@ -6,8 +6,8 @@ import org.newdawn.slick.SlickException;
 
 public class Tile {
 
-	public static final int TILE_WIDTH = 256;
-	public static final int TILE_HEIGHT = 256;
+	public static final int TILE_WIDTH = 512;
+	public static final int TILE_HEIGHT = 512;
 	
 	private Image image = null;
 	

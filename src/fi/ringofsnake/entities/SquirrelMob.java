@@ -18,14 +18,19 @@ public class SquirrelMob extends AEntity {
 	public SquirrelMob() {
 		
 		squirrels = new Squirrel[SQUIRREL_COUNT];
+		
 		for (int i = 0; i < squirrels.length; i++) {
+			
 			int x = -100;
 			int y = 20;
+			
 			float speed = (float)Math.random() + 0.7f;
+			
 			if (speed > 1)
 				speed = 1.0f;
 			
 			boolean alt = false;
+			
 			if(Math.random() > 0.5)
 				alt = true;
 			

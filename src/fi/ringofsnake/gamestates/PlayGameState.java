@@ -1,14 +1,17 @@
 package fi.ringofsnake.gamestates;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fi.ringofsnake.main.Main;
+import fi.ringofsnake.entities.ScrollingBackGround;
 import fi.ringofsnake.entities.SnakeMap;
 import fi.ringofsnake.entities.Squirrel;
 import fi.ringofsnake.entities.SquirrelMob;
@@ -26,47 +29,80 @@ public class PlayGameState extends BasicGameState {
 
 	private float[] offset = { 0.0f, 0.0f };
 
+	private ScrollingBackGround scrollingBackGround;
+	
+	private Music gamePlayMusic;
+	
 	public PlayGameState(int stateID) {
-		this.stateID = stateID;
+		this.stateID = stateID;		
 	}
 
 	public int getID() {
 		return stateID;
 	}
 
+	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
+		
+		currentMap = new SnakeMap(10, 3);
 		player = new Player(container);
-		squirrels = new SquirrelMob();
 
-		currentMap = new SnakeMap();
-		player = new Player(container);
+		gamePlayMusic = ResourceManager.fetchMusic("GAMEPLAY_BG_MUSIC");
+
+		scrollingBackGround = new ScrollingBackGround(0.5f);
+		squirrels = new SquirrelMob();
 	}
 
+
+	@Override
+	public void enter(GameContainer container, StateBasedGame game)
+			throws SlickException {
+	
+		super.enter(container, game);
+		gamePlayMusic.loop();	
+	}
+	
+	@Override
+	public void leave(GameContainer container, StateBasedGame game)
+			throws SlickException {
+
+		super.leave(container, game);
+		gamePlayMusic.stop();
+	}
+	
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
 		// TODO read map
-		Tile tile = currentMap.getTile(0, 0);
 
-		// Background
-		for (int i = -1, n = container.getScreenWidth()
-				/ tile.getImage().getWidth() + 1; i < n; i++) {
-			for (int j = -1, m = container.getScreenWidth()
-					/ tile.getImage().getWidth() + 1; j < m; j++) {
-				tile.render(g,
-						(int) (i * tile.getImage().getWidth() + offset[0]),
-						(int) (j * tile.getImage().getHeight() + offset[1]),
-						i % 2 == 1, j % 2 == 1);
-			}
-		}
-
+		scrollingBackGround.render(container, g);
+		
+		//This moves the map position relative to cat
+		g.translate( (int)-player.position.x, (int) -player.position.y - 180 );
+		currentMap.render(container, g);
+		g.resetTransform();
+		
 		// just for now
 		player.render(container, g);
+		
+		//Draw scores and other things here. Bitch.
 		squirrels.render(container, g);
+		
+		drawDebugLines( container, g );
 	}
 
+	private void drawDebugLines( GameContainer cont, Graphics g ) {
+		
+		g.setColor(Color.red);
+		
+		for( int y = 50; y<cont.getHeight();y += 50) {
+			g.drawString( String.valueOf(y), 5, y);
+			g.drawLine(20, y, 40, y);
+		}
+	}
+	
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
@@ -84,9 +120,14 @@ public class PlayGameState extends BasicGameState {
 																	// rect
 																	// tiles
 		// FIXME bg scrolling, do this with camera?
-		float step = (float) Math
-				.sin((double) (System.currentTimeMillis()) / 1000.0);
+		float step = (float) Math.sin((double) (System.currentTimeMillis()) / 1000.0);
 		offset[0] = ((offset[0] + step) % mod);
 		offset[1] = ((offset[1] + step) % mod);
+		
+		//This adjust cat / player position relative to the screen
+		player.cameraOffsetX = container.getWidth() / 3 - player.getWidth();
+		player.cameraOffsetY = container.getHeight() / 2 ;
+		
+		scrollingBackGround.update(container, delta);
 	}
 }

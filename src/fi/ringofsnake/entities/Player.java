@@ -28,11 +28,16 @@ public class Player extends AEntity {
 	private int floorlevel = 350;
 	
 	private Vector2f gravity = new Vector2f(0.000f, 0.01f);
+	private int width, height;
+	
 	
 	private static final float padScaling = 0.5f;
 	private static final float deadZone = 0.05f;
 	
-	JoystickListener listener;
+	public float cameraOffsetX;
+	public float cameraOffsetY;
+	
+	
 	
 	/**
 	 * Creates a new player.
@@ -42,14 +47,13 @@ public class Player extends AEntity {
 		velocity = new Vector2f();
 		
 		friction = 0.98f;		
-		
-		listener = new JoystickListener(this);
-		cont.getInput().addControllerListener(listener);
-		
+			
 		jumpImpulse = new Impulse(0, new Vector2f(0.0f, 0.0f), this );
 		
 		running = ResourceManager.fetchAnimation("CAT_RUN");
 		jumping = ResourceManager.fetchAnimation("CAT_JUMP");
+		width = running.getWidth();
+		height = running.getHeight();
 	}
 	
 	/**
@@ -99,7 +103,6 @@ public class Player extends AEntity {
 			if(velocity.x < maxSpeed)
 				x = 0.01f;
 		}
-		//System.out.println( jumpImpulse.isAffecting());
 		
 		if ( input.isKeyPressed(Input.KEY_UP) && touchingLand() ) {
 			jumpImpulse.launch(0.2f, new Vector2f(0,-0.08f));
@@ -128,6 +131,8 @@ public class Player extends AEntity {
 		}
 		
 		jumpImpulse.update(delta);
+		
+		running.setSpeed( Math.abs(velocity.length() / 10 * delta) );
 	}
 	
 	private boolean touchingLand() {
@@ -136,5 +141,13 @@ public class Player extends AEntity {
 	
 	private boolean isJumping() {
 		return !touchingLand();
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 }
