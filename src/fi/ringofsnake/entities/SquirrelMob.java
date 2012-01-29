@@ -6,8 +6,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.util.Log;
-
 
 import fi.ringofsnake.io.ResourceManager;
 
@@ -22,7 +20,12 @@ public class SquirrelMob extends AEntity {
 	
 	private static final int SQUIRREL_COUNT = 20;
 	
-	public SquirrelMob() {
+	public SquirrelMob( GameContainer cont ) {
+				
+		int maxHorizontalPosition = 100;
+		
+		int minVerticalPosition = 50;
+		int maxVerticalPosition = 500;		
 		
 		squirrels = new Squirrel[SQUIRREL_COUNT];
 		
@@ -41,7 +44,10 @@ public class SquirrelMob extends AEntity {
 			if(Math.random() > 0.5)
 				alt = true;
 			
-			squirrels[i] = new Squirrel(x + (int)(Math.random() * 300), y + (int)(Math.random() * 450 - 50), speed, alt);
+			squirrels[i] = new Squirrel(x + (int)(Math.random() * maxHorizontalPosition), 
+										y + (int)(Math.random() * maxVerticalPosition - minVerticalPosition), 
+										speed, 
+										alt);
 			
 			
 			//this.shape = new Rectangle(x, y, width, height)
@@ -52,6 +58,21 @@ public class SquirrelMob extends AEntity {
 		chirps = new Sound[] {ResourceManager.fetchSound("SQUIRREL_CHIRP_1"), ResourceManager.fetchSound("SQUIRREL_CHIRP_2"),
 				ResourceManager.fetchSound("SQUIRREL_VOICE_1"), ResourceManager.fetchSound("SQUIRREL_VOICE_2"),
 				ResourceManager.fetchSound("SQUIRREL_VOICE_3"), ResourceManager.fetchSound("SQUIRREL_VOICE_4")};
+		
+		this.shape = new Rectangle(0, 0, findSquirrelsMaxHorizontalPosition(), cont.getHeight());
+	}
+	
+	public float findSquirrelsMaxHorizontalPosition() {
+		
+		float maxX = 0;
+		
+		for (Squirrel sq : squirrels) {
+			if( sq.shape.getMaxX() >  maxX ) {
+				maxX = sq.shape.getMaxX();
+			}
+		}
+		
+		return maxX;
 	}
 	
 	@Override
@@ -59,17 +80,9 @@ public class SquirrelMob extends AEntity {
 		for (int i = 0; i < squirrels.length; i++) {
 			squirrels[i].render(cont, grap);
 		}
-	}
-
-	@Override
-	public boolean colliding(AEntity entity) {		
-		for (Squirrel s : squirrels) {
-			if(s.colliding(entity) ) {						
-				return true;
-			}				
-		}
 		
-		return false;
+		grap.setColor(Color.orange);
+		grap.draw(this.shape);
 	}
 	
 	@Override
@@ -79,14 +92,23 @@ public class SquirrelMob extends AEntity {
 			runningSound.loop(1, (float)0.7);
 
 		boolean playing = false;
+		
 		for (Sound chirp : chirps) {
 			if (chirp.playing())
 				playing = true;
 		}
+		
 		if (!playing && Math.random() > 0.99) {
 			int whichToPlay = (int)(Math.random() * chirps.length);
 			chirps[whichToPlay].play();
 		}
+		
+		for (Squirrel sq : squirrels) {
+			sq.update(cont, delta);
+		}
+				
+		Rectangle hitBox = (Rectangle)shape;
+		hitBox.setWidth(findSquirrelsMaxHorizontalPosition());		
 	}
 
 	public void stop() {

@@ -1,9 +1,13 @@
 
 package fi.ringofsnake.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Sound;
 
 import org.newdawn.slick.Input;
@@ -16,10 +20,12 @@ import fi.ringofsnake.util.Impulse;
 
 public class Player extends AEntity {
 		
-	private int healt = 100;
+	private int lives = 1;
 		
 	private Animation running;
 	private Animation jumping;
+	
+	private List<Gore> gore = new ArrayList<Gore> (); 
 	
 	private Sound[] voices;
 	
@@ -63,6 +69,13 @@ public class Player extends AEntity {
 							  jumping.getHeight() );
 		
 		Input.disableControllers();
+		
+		ResourceManager.fetchImage("");
+		
+		for( int i=0; i < 20; i++ ) {
+			Gore gore = new Gore(position.x, position.y);
+			this.gore.add( gore );
+		}
 	}
 	
 	/**
@@ -84,6 +97,12 @@ public class Player extends AEntity {
 		grap.drawString("pY " + position.y, 10, 570);
 				
 		grap.draw(shape);
+		
+		if( !isAlive() ) {
+			for( Gore g : gore) {
+				g.render(cont, grap);
+			}
+		}
 	}
 
 	/**
@@ -94,12 +113,26 @@ public class Player extends AEntity {
 	@Override
 	public void update(GameContainer cont, int delta) throws SlickException {		
 		Input input = cont.getInput();
+		
 		updateMovement(input, delta);
 		updateHitbox();
+		playSounds();
 		
+		if( isAlive() ) {
+			for( Gore g : gore ) {
+				g.setPos(this.position.x, this.position.y);
+			}
+		} 
+		else {
+			for( Gore g : gore ) {				
+				g.update(cont, delta);
+			}	
+		}
+	}
 
-
+	public void playSounds() {
 		boolean playing = false;
+		
 		for (Sound voice : voices) {
 			if (voice.playing())
 				playing = true;
@@ -158,6 +191,7 @@ public class Player extends AEntity {
 		jumpImpulse.update(delta);		
 		
 		running.setSpeed( Math.abs(velocity.length() / 10 * delta) );
+		
 	}
 	
 	private boolean touchingLand() {
@@ -174,5 +208,15 @@ public class Player extends AEntity {
 	
 	public int getHeight() {
 		return height;
+	}
+	
+	public void removeLive() {
+		if( isAlive() ){
+			this.lives--;	
+		}		
+	}
+	
+	public boolean isAlive() {
+		return this.lives > 0;
 	}
 }

@@ -1,6 +1,5 @@
 package fi.ringofsnake.entities;
 
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -22,7 +21,7 @@ public abstract class AEntity implements Comparable<AEntity>, IGameObject {
 	/**
 	 * Entity position
 	 */
-	public Vector2f position;
+	public Vector2f position = new Vector2f();
 	
 	/**
 	 * Entity velocity or speed
@@ -38,7 +37,7 @@ public abstract class AEntity implements Comparable<AEntity>, IGameObject {
 	 * Layer number means a drawing order.
 	 * Entities with smallest numbers are drawn first.
 	 */
-	public int layer;
+	public int layer;	
 		
 	/**
 	 * Is entity alive	
@@ -74,7 +73,7 @@ public abstract class AEntity implements Comparable<AEntity>, IGameObject {
 		setPos(x, y);
 	}
 	
-	public void setPos( int x, int y ) {	
+	public void setPos( float x, float y ) {	
 		position.x = x;
 		position.y = y;
 	}

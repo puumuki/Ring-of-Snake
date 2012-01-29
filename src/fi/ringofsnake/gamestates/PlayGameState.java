@@ -59,7 +59,9 @@ public class PlayGameState extends BasicGameState {
 		gamePlayMusic = ResourceManager.fetchMusic("GAMEPLAY_BG_MUSIC");
 
 		scrollingBackGround = new ScrollingBackGround(0.5f);
-		squirrels = new SquirrelMob();
+		squirrels = new SquirrelMob(container);
+		
+		player.position.x = squirrels.findSquirrelsMaxHorizontalPosition() + 10;
 		
 		boxes = new BoxDispenser();
 	}
@@ -108,6 +110,8 @@ public class PlayGameState extends BasicGameState {
 		drawDebugLines( container, g );
 		
 		boxes.render(container, g);
+		
+		
 	}
 
 	private void drawDebugLines( GameContainer cont, Graphics g ) {
@@ -138,14 +142,18 @@ public class PlayGameState extends BasicGameState {
 		// FIXME bg scrolling, do this with camera?
 		float step = (float) Math.sin((double) (System.currentTimeMillis()) / 1000.0);
 		offset[0] = ((offset[0] + step) % mod);
-		offset[1] = ((offset[1] + step) % mod);
-				
+		offset[1] = ((offset[1] + step) % mod);								
 
 		scrollingBackGround.update(container, delta);	
 		
 		boxes.update(container, delta);
 		
-		currentMap.tunnelHorizontalOffset += currentMap.tunnelSpeed * delta;
-		
+		hitDetection();
+	}
+	
+	private void hitDetection() {
+		if( player.colliding(squirrels) ) {
+			player.removeLive();
+		}
 	}
 }
