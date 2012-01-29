@@ -44,17 +44,17 @@ public class SquirrelMob extends AEntity {
 	public void createSquirrles() {
 		int maxHorizontalPosition = 50;
 		
-		int minVerticalPosition = 50;
-		int maxVerticalPosition = 500;		
+		int minVerticalPosition = 100;
+		int maxVerticalPosition = 450;		
 		
 		squirrels = new Squirrel[SQUIRREL_COUNT];
 		
 		for (int i = 0; i < squirrels.length; i++) {
 			
 			int x = -300;
-			int y = 20;
+			int y = 150;
 			
-			float speed = (float)Math.random() + 0.7f;
+			float speed = (float)(Math.random() + 0.3f);
 			
 			if (speed > 1)
 				speed = 1.0f;
