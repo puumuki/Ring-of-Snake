@@ -21,7 +21,6 @@ public class GameOverGameState extends BasicGameState {
 	private Image bg;
 	
 	private int stateID = -1;
-	private UnicodeFont font;
 	
 	
 	public GameOverGameState(int gameStateId) {
