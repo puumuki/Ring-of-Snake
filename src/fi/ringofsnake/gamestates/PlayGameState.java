@@ -142,6 +142,6 @@ public class PlayGameState extends BasicGameState {
 		
 		box.update(container, delta);
 		
-		currentMap.tunnelHorizontalOffset += currentMap.tunnelSpeed * delta;
+		
 	}
 }

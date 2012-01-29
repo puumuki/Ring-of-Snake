@@ -84,7 +84,7 @@ public class SnakeMap implements IGameObject {
 	
 	@Override
 	public void update(GameContainer cont, int delta) throws SlickException {
-		// TODO Auto-generated method stub
+		tunnelHorizontalOffset += tunnelSpeed * delta;
 		
 	}
 

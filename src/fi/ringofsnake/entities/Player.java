@@ -16,6 +16,8 @@ import fi.ringofsnake.util.Impulse;
 
 public class Player extends AEntity {
 		
+	private int healt = 100;
+		
 	private Animation running;
 	private Animation jumping;
 	
