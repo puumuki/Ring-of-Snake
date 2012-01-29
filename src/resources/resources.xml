@@ -28,6 +28,19 @@
 	<resource type="image" id="BOX">resources\objects\Farm-Fresh_box.png</resource>
 	<resource type="image" id="GOO">resources\objects\lima.png</resource>
 
+<!-- UI -->
+	<resource type="image" id="NUM_0">resources\ui\numbers\0.png</resource>
+	<resource type="image" id="NUM_1">resources\ui\numbers\1.png</resource>
+	<resource type="image" id="NUM_2">resources\ui\numbers\2.png</resource>
+	<resource type="image" id="NUM_3">resources\ui\numbers\3.png</resource>
+	<resource type="image" id="NUM_4">resources\ui\numbers\4.png</resource>
+	<resource type="image" id="NUM_5">resources\ui\numbers\5.png</resource>
+	<resource type="image" id="NUM_6">resources\ui\numbers\6.png</resource>
+	<resource type="image" id="NUM_7">resources\ui\numbers\7.png</resource>
+	<resource type="image" id="NUM_8">resources\ui\numbers\8.png</resource>
+	<resource type="image" id="NUM_9">resources\ui\numbers\9.png</resource>
+	<resource type="image" id="NUM_M">resources\ui\numbers\m.png</resource>
+
 <!-- Main Menu -->
 	<resource type="sound" id="MENU_CLICK_SOUND">resources\sounds\menu.wav</resource>
 	<resource type="image" id="MENU_BG">resources\ui\snakeStartScreen_ringless_versio_2.png</resource>
