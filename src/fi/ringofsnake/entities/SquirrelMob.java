@@ -27,6 +27,21 @@ public class SquirrelMob extends AEntity {
 	
 	public SquirrelMob( GameContainer cont ) {
 				
+		createSquirrles();		
+		initShape(cont);
+		
+		runningSound = ResourceManager.fetchSound("SQUIRRELS_RUNNING");
+		
+		chirps = new Sound[] {ResourceManager.fetchSound("SQUIRREL_CHIRP_1"), ResourceManager.fetchSound("SQUIRREL_CHIRP_2"),
+				ResourceManager.fetchSound("SQUIRREL_VOICE_1"), ResourceManager.fetchSound("SQUIRREL_VOICE_2"),
+				ResourceManager.fetchSound("SQUIRREL_VOICE_3"), ResourceManager.fetchSound("SQUIRREL_VOICE_4")};		
+	}
+
+	public void initShape(GameContainer cont) {
+		this.shape = new Rectangle(0, 0, findSquirrelsMaxHorizontalPosition(), cont.getHeight());
+	}
+
+	public void createSquirrles() {
 		int maxHorizontalPosition = 50;
 		
 		int minVerticalPosition = 50;
@@ -53,18 +68,7 @@ public class SquirrelMob extends AEntity {
 										y + (int)(Math.random() * maxVerticalPosition - minVerticalPosition), 
 										speed, 
 										alt);
-			
-			
-			//this.shape = new Rectangle(x, y, width, height)
 		}
-		
-		runningSound = ResourceManager.fetchSound("SQUIRRELS_RUNNING");
-		
-		chirps = new Sound[] {ResourceManager.fetchSound("SQUIRREL_CHIRP_1"), ResourceManager.fetchSound("SQUIRREL_CHIRP_2"),
-				ResourceManager.fetchSound("SQUIRREL_VOICE_1"), ResourceManager.fetchSound("SQUIRREL_VOICE_2"),
-				ResourceManager.fetchSound("SQUIRREL_VOICE_3"), ResourceManager.fetchSound("SQUIRREL_VOICE_4")};
-		
-		this.shape = new Rectangle(0, 0, findSquirrelsMaxHorizontalPosition(), cont.getHeight());
 	}
 	
 	public float findSquirrelsMaxHorizontalPosition() {
@@ -124,5 +128,10 @@ public class SquirrelMob extends AEntity {
 
 	public void stop() {
 		runningSound.stop();
+	}
+	
+	public void reset() {
+		horizontaPosition = 0;				
+		createSquirrles();
 	}
 }

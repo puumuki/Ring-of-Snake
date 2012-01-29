@@ -22,7 +22,9 @@ public class Player extends AEntity {
 	
 	private static final int GORE_ITEM_COUNT = 500;
 	
-	private int lives = 1;
+	private static final int INITIAL_LIVES = 1;
+	
+	private int lives = INITIAL_LIVES;
 		
 	private Animation running;
 	private Animation jumping;
@@ -240,5 +242,9 @@ public class Player extends AEntity {
 	
 	public boolean isAlive() {
 		return this.lives > 0;
+	}
+	
+	public void reset() {
+		this.lives = INITIAL_LIVES;
 	}
 }

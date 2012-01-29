@@ -105,4 +105,8 @@ public class BoxDispenser {
 		boxes.removeAll(toRemove);
 	}
 	
+	
+	public void reset() {
+		boxes.clear();
+	}
 }

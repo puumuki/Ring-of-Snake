@@ -36,6 +36,5 @@ public class Squirrel extends AEntity {
 	@Override
 	public void update(GameContainer cont, int delta) throws SlickException {
 		this.shape.setLocation(position.x, position.y);
-	}
-
+	}	
 }
