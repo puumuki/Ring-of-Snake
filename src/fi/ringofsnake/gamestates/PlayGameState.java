@@ -115,9 +115,7 @@ public class PlayGameState extends BasicGameState {
 		
 		squirrels.update(container, delta);
 		player.update(container, delta);
-				
-		
-		
+			
 		Input input = container.getInput();
 		
 		if (input.isKeyPressed(Input.KEY_PAUSE)	|| input.isKeyPressed(Input.KEY_ESCAPE)) {
@@ -132,8 +130,7 @@ public class PlayGameState extends BasicGameState {
 		offset[0] = ((offset[0] + step) % mod);
 		offset[1] = ((offset[1] + step) % mod);
 				
-		scrollingBackGround.update(container, delta);
-		
+		scrollingBackGround.update(container, delta);		
 		currentMap.tunnelHorizontalOffset += currentMap.tunnelSpeed * delta;
 	}
 }
