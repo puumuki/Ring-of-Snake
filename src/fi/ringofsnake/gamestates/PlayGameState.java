@@ -42,9 +42,6 @@ public class PlayGameState extends BasicGameState {
 	public int getID() {
 		return stateID;
 	}
-
-	private float tunnelHorizontalOffset = 0;	
-	private float tunnelSpeed = 0.5f;
 	
 	private Box box;
 	
@@ -52,9 +49,10 @@ public class PlayGameState extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		
-		currentMap = new SnakeMap(3000, 3);
+		
 		player = new Player(container);
-
+		currentMap = new SnakeMap(3000, 3, player);
+		
 		gamePlayMusic = ResourceManager.fetchMusic("GAMEPLAY_BG_MUSIC");
 
 		scrollingBackGround = new ScrollingBackGround(0.5f);
@@ -89,7 +87,7 @@ public class PlayGameState extends BasicGameState {
 		scrollingBackGround.render(container, g);
 		
 		//This moves the map position relative to cat
-		g.translate( (int)-(player.position.x + tunnelHorizontalOffset), 
+		g.translate( (int)-(player.position.x + currentMap.tunnelHorizontalOffset), 
 						  -container.getHeight()/2 - 80 );
 		
 		currentMap.render(container, g);		
@@ -143,7 +141,8 @@ public class PlayGameState extends BasicGameState {
 				
 		scrollingBackGround.update(container, delta);
 		
-		tunnelHorizontalOffset += tunnelSpeed * delta;
 		box.update(container, delta);
+		currentMap.tunnelHorizontalOffset += currentMap.tunnelSpeed * delta;
+
 	}
 }
