@@ -23,7 +23,7 @@ public class Gore extends AEntity {
 											 ResourceManager.fetchImage("MEAT_3"),
 											 ResourceManager.fetchImage("BONE_1"),
 											 ResourceManager.fetchImage("BONE_2"),
-											 ResourceManager.fetchImage("BONE_3")};
+											 ResourceManager.fetchImage("BONE_3")};	
 	
 	private Image image;
 	
@@ -36,6 +36,9 @@ public class Gore extends AEntity {
 		int index = random.nextInt( resource.length );		
 		image = resource[index].copy();
 		
+		image.setCenterOfRotation( image.getWidth()/2, image.getHeight()/2);
+		
+		rotation = random.nextFloat() * 5 - 2.5f;
 	}
 	
 	@Override
@@ -48,6 +51,8 @@ public class Gore extends AEntity {
 		
 		this.position.x += this.velocity.x;
 		this.position.y += this.velocity.y;
+		
+		this.image.rotate(rotation);
 	}
 
 	private void velocityLottery() {
