@@ -76,10 +76,10 @@ public class Player extends AEntity {
 		width = running.getWidth();
 		height = running.getHeight();
 		
-		shape = new Rectangle(position.x, 
-							  position.y + 20, 
-							  jumping.getWidth(), 
-							  jumping.getHeight() -20 );
+		shape = new Rectangle(position.x + 40, 
+							  position.y + 40, 
+							  jumping.getWidth() - 80, 
+							  jumping.getHeight() -80 );
 		
 		Input.disableControllers();
 		

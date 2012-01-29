@@ -59,6 +59,8 @@
 	<resource type="image" id="MENU_BUTTON_QUIT">resources\ui\Quit_button.png</resource>
 
 	<resource type="image" id="GAMEOVER_BG">resources\ui\gameover.png</resource>
+	
+	<resource type="image" id="INFO_BG">resources\ui\infoscreen.png</resource>
 
 	<!-- TILES -->	
 	<resource type="image" id="TILE_SPACE">resources\tiles\space.png</resource>	
