@@ -92,15 +92,15 @@ public class SnakeMap implements IGameObject {
 	public void render(GameContainer cont, Graphics g) throws SlickException {		
 		for( int x = 0; x < width; x++ ) {
 			for( int y = 0; y < height; y++ ) {				
-				if( tunnelHorizontalOffset - Tile.TILE_WIDTH <= x * Tile.TILE_WIDTH 
-					&&  x * Tile.TILE_WIDTH <= tunnelHorizontalOffset + cont.getWidth() + Tile.TILE_WIDTH   
-					&& map[x][y] != Tileset.SPACE ) {										
+				// TODO: y-axis
+				if( tunnelHorizontalOffset - cont.getWidth() - Tile.TILE_WIDTH <= x * Tile.TILE_WIDTH 
+					&& tunnelHorizontalOffset + cont.getWidth() * 2 + Tile.TILE_WIDTH >= x * Tile.TILE_WIDTH   
+					&& map[x][y] != Tileset.SPACE ) {
 					tiles.get(map[x][y]).render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGHT);
-				}				
-			}	
-		}			
+				}
+			}
+		}
 	}
-
 	
 	public int getWidth() {
 		return width;
