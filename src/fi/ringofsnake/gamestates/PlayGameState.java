@@ -64,7 +64,7 @@ public class PlayGameState extends BasicGameState {
 		scrollingBackGround = new ScrollingBackGround(0.5f);
 		squirrels = new SquirrelMob(container);
 		
-		player.position.x = squirrels.findSquirrelsMaxHorizontalPosition() + 10;
+		player.position.x = squirrels.findSquirrelsMaxHorizontalPosition() + 100;
 		
 		boxes = new BoxDispenser(player, squirrels);
 		
