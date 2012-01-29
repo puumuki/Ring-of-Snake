@@ -116,6 +116,13 @@ public class PlayGameState extends BasicGameState {
 		scoreboard.render(container, g);
 	}
 
+	private void resetGamePlay() {
+		squirrels.reset();
+		player.reset();
+		currentMap.tunnelHorizontalOffset = 0;
+		boxes.reset();
+	}
+	
 	private void drawDebugLines( GameContainer cont, Graphics g ) {
 		
 		g.setColor(Color.red);
@@ -138,6 +145,10 @@ public class PlayGameState extends BasicGameState {
 			game.enterState(Main.MAINMENU_GAME_STATE);
 		}
 				
+		if( input.isKeyPressed(Input.KEY_R)) {
+			resetGamePlay();
+		}
+		
 		scrollingBackGround.update(container, delta);			
 		boxes.update(container, delta);				
 		currentMap.update(container, delta);
