@@ -29,7 +29,6 @@ public class GameOverGameState extends BasicGameState {
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-
 		bg = ResourceManager.fetchImage("GAMEOVER_BG");		
 		scoreBoard.setPos( container.getWidth() / 2 - 100 , container.getHeight() / 2 +100 );
 	}
@@ -38,6 +37,7 @@ public class GameOverGameState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		bg.draw();
 		//scoreBoard.render(container, g);
+		
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class GameOverGameState extends BasicGameState {
 		}
 	}
 	
-	public void setFinalScores(int scores) {
+	public void setFinalScores(int scores) {		
 		scoreBoard.setNumber(scores);
 	}
 
