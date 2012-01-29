@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 
 import fi.ringofsnake.io.ResourceManager;
 
@@ -25,10 +26,8 @@ public class NumberTable extends AEntity {
 	
 	private int number;
 
-	private SnakeMap currentMap;
-	
-	public NumberTable( SnakeMap map ) {
-		this.currentMap = map;
+	public NumberTable() {
+		this.position = new Vector2f();
 	}
 	
 	
@@ -46,7 +45,7 @@ public class NumberTable extends AEntity {
 				index = Integer.parseInt( Character.toString(numberString.charAt(index))) ;				
 			} else {
 				index = 0;
-			}
+			}			
 			
 			grap.drawImage(numbers[index], position.x - i * 50, position.y );
 		}
@@ -56,6 +55,9 @@ public class NumberTable extends AEntity {
 
 	@Override
 	public void update(GameContainer cont, int delta) throws SlickException {
-		number = (int)currentMap.tunnelHorizontalOffset;
+	}
+	
+	public void setNumber( int number ) {
+		this.number = number;
 	}
 }

@@ -44,6 +44,8 @@ public class Player extends AEntity {
 	// FIXME
 	private int floorlevel = 450;
 	
+	private int INITIAL_HORIZONTAL_POS = 200;
+	
 	private Vector2f gravity = new Vector2f(0.000f, 0.01f);
 	private int width, height;
 	
@@ -57,7 +59,7 @@ public class Player extends AEntity {
 	 * Creates a new player.
 	 */
 	public Player( GameContainer cont ) {
-		position = new Vector2f(200, floorlevel);
+		position = new Vector2f(INITIAL_HORIZONTAL_POS, floorlevel);
 		velocity = new Vector2f();
 		
 		friction = 0.98f;		
@@ -245,6 +247,8 @@ public class Player extends AEntity {
 	}
 	
 	public void reset() {
+		this.position.x = INITIAL_HORIZONTAL_POS;
+		this.position.y = floorlevel;
 		this.lives = INITIAL_LIVES;
 	}
 }

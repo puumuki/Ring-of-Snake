@@ -68,7 +68,7 @@ public class PlayGameState extends BasicGameState {
 		
 		boxes = new BoxDispenser(player, squirrels);
 		
-		scoreboard = new NumberTable(currentMap);
+		scoreboard = new NumberTable();
 		scoreboard.setPos( container.getWidth() -100 , container.getHeight() - 100 );
 	}
 
@@ -88,6 +88,7 @@ public class PlayGameState extends BasicGameState {
 		super.leave(container, game);
 		//gamePlayMusic.stop();
 		squirrels.stop();
+		resetGamePlay();
 	}
 	
 	@Override
@@ -156,13 +157,17 @@ public class PlayGameState extends BasicGameState {
 		currentMap.update(container, delta);
 		
 		if( player.isAlive() ) {
-			scoreboard.update(container, delta);
+			scoreboard.setNumber((int)currentMap.tunnelHorizontalOffset);
 		}
 		else {
 			if (player.deadTime < 2500) {
 				player.deadTime += 1*delta;
 			}
 			else {
+				
+				GameOverGameState gameOverState = (GameOverGameState)game.getState(Main.GAMEOVER_GAME_STATE);
+				gameOverState.setFinalScores((int) currentMap.tunnelHorizontalOffset);
+				
 				game.enterState(Main.GAMEOVER_GAME_STATE, 								
 						new FadeOutTransition(), 
 						new FadeInTransition());
