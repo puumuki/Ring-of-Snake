@@ -28,8 +28,10 @@ public class Gore extends AEntity {
 	private Image image;
 	
 	public Gore(float posX, float posY) {
-		this.position.set(posX, posY);
+		this.position.set((float)(posX + Math.random() * 100 - 50), (float)(posY + Math.random() * 100 - 50));
 		this.velocity = new Vector2f();
+		
+		velocityLottery();
 		
 		int index = random.nextInt( resource.length );		
 		image = resource[index].copy();
@@ -43,10 +45,6 @@ public class Gore extends AEntity {
 
 	@Override
 	public void update(GameContainer cont, int delta) throws SlickException {
-		
-		if(this.velocity.x == 0) {
-			velocityLottery();
-		}
 		
 		this.position.x += this.velocity.x;
 		this.position.y += this.velocity.y;
