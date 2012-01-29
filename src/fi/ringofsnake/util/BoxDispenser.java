@@ -8,10 +8,8 @@ import java.util.List;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.util.Log;
 
 import fi.ringofsnake.entities.Box;
-import fi.ringofsnake.entities.SnakeMap;
 
 /**
  * Creates boxes for the player to try to bypass
@@ -24,10 +22,7 @@ public class BoxDispenser {
 	
 	private List<Box> boxes = new LinkedList<Box>();
 	
-	private SnakeMap map;
-	
-	public BoxDispenser(SnakeMap map) {
-		this.map = map;
+	public BoxDispenser() {
 	}
 	
 	private void createBox() {
