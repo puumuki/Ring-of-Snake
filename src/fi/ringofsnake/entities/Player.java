@@ -20,7 +20,7 @@ import fi.ringofsnake.util.Impulse;
 
 public class Player extends AEntity {	
 	
-	private static final int GORE_ITEM_COUNT = 5000;
+	private static final int GORE_ITEM_COUNT = 500;
 	
 	private int lives = 1;
 		
@@ -32,6 +32,8 @@ public class Player extends AEntity {
 	private Sound[] voices;
 	
 	private Impulse jumpImpulse;
+	
+	private Impulse hitImpulse;
 	
 	private float maxSpeed = 1.0f;
 	
@@ -57,6 +59,7 @@ public class Player extends AEntity {
 		friction = 0.98f;		
 			
 		jumpImpulse = new Impulse(0, new Vector2f(0.0f, 0.0f), this );
+		hitImpulse = new Impulse(0, new Vector2f(0.0f, 0.0f), this );
 		
 		running = ResourceManager.fetchAnimation("CAT_RUN");
 		jumping = ResourceManager.fetchAnimation("CAT_JUMP");
@@ -202,7 +205,8 @@ public class Player extends AEntity {
 			position.y = floorlevel;
 		}
 		
-		jumpImpulse.update(delta);		
+		jumpImpulse.update(delta);
+		hitImpulse.update(delta);
 		
 		running.setSpeed( Math.abs(velocity.length() / 10 * delta) );
 		
@@ -222,6 +226,11 @@ public class Player extends AEntity {
 	
 	public int getHeight() {
 		return height;
+	}
+	
+	
+	public void boxHit() {
+		hitImpulse.launch(0.2f, new Vector2f(-0.05f, 0));
 	}
 	
 	public void removeLive() {

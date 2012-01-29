@@ -37,4 +37,8 @@ public class Impulse {
 			target.velocity.y += force.y;
 		}
 	}
+	
+	public void add(Vector2f v) {
+		force.add(v);
+	}
 }

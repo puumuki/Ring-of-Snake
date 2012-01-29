@@ -65,8 +65,10 @@ public class BoxDispenser {
 			else {
 
 				if (box.colliding(player)) {
-					if (box.isVisible())
+					if (box.isVisible()) {
 						box.hide();
+						player.boxHit();
+					}
 					
 					if (box.bangImage() == 0)
 						bangImg.draw(box.position.x, box.position.y);
