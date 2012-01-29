@@ -129,6 +129,10 @@ public class Player extends AEntity {
 	public void update(GameContainer cont, int delta) throws SlickException {		
 		Input input = cont.getInput();
 		
+		if( isOutsideScreen(cont) ) {
+			this.velocity.x -= 0.1f;
+		}
+		
 		updateMovement(input, delta);
 		updateHitbox();
 		playSounds();
@@ -143,7 +147,7 @@ public class Player extends AEntity {
 			for( Gore g : gore ) {				
 				g.update(cont, delta);
 			}	
-		}
+		}		
 	}
 
 	public void playSounds() {
@@ -240,6 +244,10 @@ public class Player extends AEntity {
 				catPissed.play();	
 			}
 		}		
+	}
+	
+	public boolean isOutsideScreen( GameContainer container ) {
+		return shape.getMaxX() > container.getWidth();  
 	}
 	
 	public boolean isAlive() {

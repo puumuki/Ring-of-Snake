@@ -111,6 +111,7 @@ public class PlayGameState extends BasicGameState {
 		// just for now
 		player.render(container, g);
 
+		 
 
 		//Draw scores and other things here. Bitch.		
 		//drawDebugLines( container, g );		
