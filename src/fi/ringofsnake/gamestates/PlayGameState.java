@@ -61,7 +61,7 @@ public class PlayGameState extends BasicGameState {
 		scrollingBackGround = new ScrollingBackGround(0.5f);
 		squirrels = new SquirrelMob();
 		
-		boxes = new BoxDispenser();
+		boxes = new BoxDispenser(player);
 	}
 
 

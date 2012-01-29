@@ -16,6 +16,9 @@ public class Box extends AEntity {
 	
 	private Image boxImg;
 	
+	private boolean visible = true;
+	private int bangImg = 0;
+	
 	public Box(int x, int y, float velX, float velY) {
 		boxImg = ResourceManager.fetchImage("BOX").getScaledCopy(2.0f);
 		position = new Vector2f(x, y);
@@ -39,6 +42,19 @@ public class Box extends AEntity {
 		position.add(velocity);
 		shape.setLocation(this.position.x, this.position.y);
 		
+	}
+	
+	public void hide() {
+		visible = false;
+		bangImg = (int)(Math.random() * 2);
+	}
+	
+	public boolean isVisible() {
+		return visible;
+	}
+	
+	public int bangImage() {
+		return bangImg;
 	}
 	
 }

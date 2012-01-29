@@ -7,9 +7,12 @@ import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import fi.ringofsnake.entities.Box;
+import fi.ringofsnake.entities.Player;
+import fi.ringofsnake.io.ResourceManager;
 
 /**
  * Creates boxes for the player to try to bypass
@@ -22,7 +25,15 @@ public class BoxDispenser {
 	
 	private List<Box> boxes = new LinkedList<Box>();
 	
-	public BoxDispenser() {
+	private Image bangImg;
+	private Image bangImg2;
+	
+	private Player player;
+	
+	public BoxDispenser(Player player) {
+		bangImg = ResourceManager.fetchImage("BANG").getScaledCopy(2.0f);
+		bangImg2 = ResourceManager.fetchImage("BANG_2").getScaledCopy(2.0f);
+		this.player = player;
 	}
 	
 	private void createBox() {
@@ -38,21 +49,34 @@ public class BoxDispenser {
 		if (Math.random() > 0.99)
 			createBox();
 		
-		for (Box box : boxes)
+		for (Box box : boxes) {
 			box.update(cont, delta);
+		}
 	}
 	
 	public void render(GameContainer cont, Graphics g) throws SlickException {
 		HashSet<Box> toRemove = new HashSet<Box>();
 		for (Iterator<Box> i = boxes.iterator(); i.hasNext();) {
 			Box box = i.next();
-			if ( box.position.x < -100)
-			{
+			if ( box.position.x < -100) {
 				//Log.debug("Destroying box at " + box.position.x);
 				toRemove.add(box);
 			}
-			else
-				box.render(cont, g);
+			else {
+
+				if (box.colliding(player)) {
+					if (box.isVisible())
+						box.hide();
+					
+					if (box.bangImage() == 0)
+						bangImg.draw(box.position.x, box.position.y);
+					else
+						bangImg2.draw(box.position.x, box.position.y);
+				}
+				else if (box.isVisible()) {
+					box.render(cont, g);
+				}
+			}
 		}
 		boxes.removeAll(toRemove);
 	}
