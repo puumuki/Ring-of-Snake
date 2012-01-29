@@ -83,9 +83,6 @@ public class SquirrelMob extends AEntity {
 		for (int i = 0; i < squirrels.length; i++) {
 			squirrels[i].render(cont, grap);
 		}
-		
-		grap.setColor(Color.orange);
-		grap.draw(this.shape);
 	}
 	
 	@Override

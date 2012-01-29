@@ -112,13 +112,6 @@ public class Player extends AEntity {
 			grap.drawAnimation(jumping, position.x, position.y);
 		else
 			grap.drawAnimation(running, position.x, position.y);
-		
-		grap.drawString("vX " + velocity.x, 300, 550);
-		grap.drawString("vY " + velocity.y, 300, 570);
-		grap.drawString("pX " + position.x, 10, 550);
-		grap.drawString("pY " + position.y, 10, 570);
-				
-		grap.draw(shape);
 	}
 
 	/**
