@@ -13,8 +13,10 @@ public class SquirrelMob extends AEntity {
 
 	private float horizontaPosition = 0;
 	
-	private float horizontalSpeed = 0.0001f;
+	private float horizontalSpeed = 0.00005f;
 		
+	private float horizontalMaximun = 200;
+	
 	private Squirrel[] squirrels;
 	
 	private Sound runningSound;
@@ -75,14 +77,14 @@ public class SquirrelMob extends AEntity {
 			}
 		}
 		
-		return maxX;
+		return maxX - 50;
 	}
 	
 	@Override
 	public void render(GameContainer cont, Graphics grap) throws SlickException {
 		for (int i = 0; i < squirrels.length; i++) {
 			squirrels[i].render(cont, grap);
-		}
+		}		
 	}
 	
 	@Override
@@ -103,17 +105,19 @@ public class SquirrelMob extends AEntity {
 			chirps[whichToPlay].play();
 		}
 		
-		horizontaPosition += horizontalSpeed * delta;
+		float maxHorizontalPos = findSquirrelsMaxHorizontalPosition();
+				
+		if( maxHorizontalPos < horizontalMaximun ) {
+			horizontaPosition += horizontalSpeed * delta;
 		
-		for (Squirrel sq : squirrels) {
-			sq.position.x += horizontaPosition; 			
-			sq.update(cont, delta);
-		}
-		
-		
-		
-		Rectangle hitBox = (Rectangle)shape;
-		hitBox.setWidth(findSquirrelsMaxHorizontalPosition());
+			for (Squirrel sq : squirrels) {
+				sq.position.x += horizontaPosition; 			
+				sq.update(cont, delta);
+			}
+			
+			Rectangle hitBox = (Rectangle)shape;
+			hitBox.setWidth(maxHorizontalPos);
+		}			
 		
 		
 	}
