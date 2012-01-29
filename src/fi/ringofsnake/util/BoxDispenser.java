@@ -21,7 +21,7 @@ import fi.ringofsnake.io.ResourceManager;
  */
 public class BoxDispenser {
 	
-	private static final int[] BOXLEVELS = {200, 300, 400};
+	private static final int[] BOXLEVELS = {150, 300, 450};
 	
 	private List<Box> boxes = new LinkedList<Box>();
 	
@@ -76,6 +76,8 @@ public class BoxDispenser {
 				else if (box.isVisible()) {
 					box.render(cont, g);
 				}
+				else
+					toRemove.add(box);
 			}
 		}
 		boxes.removeAll(toRemove);

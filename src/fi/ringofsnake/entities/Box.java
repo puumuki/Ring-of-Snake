@@ -19,8 +19,19 @@ public class Box extends AEntity {
 	private boolean visible = true;
 	private int bangImg = 0;
 	
+	private boolean rotating = true;
+	
 	public Box(int x, int y, float velX, float velY) {
-		boxImg = ResourceManager.fetchImage("BOX").getScaledCopy(2.0f);
+		
+		if (Math.random() > 0.5)
+			boxImg = ResourceManager.fetchImage("BOX").getScaledCopy(2.0f);
+		else {
+			boxImg = ResourceManager.fetchImage("GOO").getScaledCopy(0.75f);
+			rotating = false;
+			y = 480;
+			velX = -10.0f;
+		}
+		
 		position = new Vector2f(x, y);
 		velocity = new Vector2f(velX, velY);
 		
@@ -38,7 +49,8 @@ public class Box extends AEntity {
 
 	@Override
 	public void update(GameContainer cont, int delta) throws SlickException {
-		boxImg.rotate(-0.2f*delta);
+		if (rotating == true)
+			boxImg.rotate(-0.2f*delta);
 		position.add(velocity);
 		shape.setLocation(this.position.x, this.position.y);
 		
