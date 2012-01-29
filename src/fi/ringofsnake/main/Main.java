@@ -6,6 +6,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.util.Log;
 
+import fi.ringofsnake.gamestates.GameOverGameState;
 import fi.ringofsnake.gamestates.InfoGameState;
 import fi.ringofsnake.gamestates.MainMenuGameState;
 import fi.ringofsnake.gamestates.OptionsGameState;
@@ -47,7 +48,7 @@ public class Main extends StateBasedGame {
         this.addState(new MainMenuGameState(MAINMENU_GAME_STATE));
         this.addState(new PlayGameState(PLAY_GAME_STATE));
         this.addState(new OptionsGameState(OPTIONS_GAME_STATE));
-//        this.addState(new GameOverState(GAMEOVERSTATE));
+        this.addState(new GameOverGameState(GAMEOVER_GAME_STATE));
         this.addState(new PauseGameState(PAUSE_GAME_STATE));
         this.addState(new InfoGameState(INFO_GAME_STATE));
         this.enterState(MAINMENU_GAME_STATE);
