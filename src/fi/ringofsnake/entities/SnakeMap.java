@@ -10,6 +10,11 @@ import fi.ringofsnake.io.ResourceManager;
 
 public class SnakeMap implements IGameObject {
 		
+	private Player player;
+	
+	public float tunnelHorizontalOffset = 0;	
+	public float tunnelSpeed = 0.5f;
+	
 	public static enum Tileset { 
 		SPACE, 
 		SNAKE_LEFT, SNAKE_UPPER, SNAKE_RIGHT, SNAKE_LOWER, SNAKE, 
@@ -42,8 +47,9 @@ public class SnakeMap implements IGameObject {
 		return tiles;
 	}
 		
-	public SnakeMap(int w, int h)
+	public SnakeMap(int w, int h, Player player)
 	{
+		this.player = player;		
 		width = w; height = h;
 		map = new Tileset[w][h];
 	
@@ -62,7 +68,7 @@ public class SnakeMap implements IGameObject {
 
 	public SnakeMap()
 	{
-		this(DEFAULT_MAP_SIZE, DEFAULT_MAP_SIZE); 
+		this(DEFAULT_MAP_SIZE, DEFAULT_MAP_SIZE, null ); 
 		createTileSet();
 	}
 	
@@ -85,10 +91,14 @@ public class SnakeMap implements IGameObject {
 	@Override
 	public void render(GameContainer cont, Graphics g) throws SlickException {		
 		for( int x = 0; x < width; x++ ) {
-			for( int y = 0; y < height; y++ ) {
-				tiles.get(map[x][y]).render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGHT);
+			for( int y = 0; y < height; y++ ) {				
+				if( tunnelHorizontalOffset - Tile.TILE_WIDTH <= x * Tile.TILE_WIDTH 
+					&&  x * Tile.TILE_WIDTH <= tunnelHorizontalOffset + cont.getWidth() + Tile.TILE_WIDTH   
+					&& map[x][y] != Tileset.SPACE ) {										
+					tiles.get(map[x][y]).render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGHT);
+				}				
 			}	
-		}	
+		}			
 	}
 
 	
