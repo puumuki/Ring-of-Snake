@@ -63,7 +63,7 @@ public class PlayGameState extends BasicGameState {
 		
 		player.position.x = squirrels.findSquirrelsMaxHorizontalPosition() + 10;
 		
-		boxes = new BoxDispenser();
+		boxes = new BoxDispenser(player);
 	}
 
 

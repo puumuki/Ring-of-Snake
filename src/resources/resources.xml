@@ -28,6 +28,9 @@
 	<resource type="image" id="BOX">resources\objects\Farm-Fresh_box.png</resource>
 	<resource type="image" id="GOO">resources\objects\lima.png</resource>
 
+	<resource type="image" id="BANG">resources\ui\bang.png</resource>
+	<resource type="image" id="BANG_2">resources\ui\bang2.png</resource>
+
 <!-- UI -->
 	<resource type="image" id="NUM_0">resources\ui\numbers\0.png</resource>
 	<resource type="image" id="NUM_1">resources\ui\numbers\1.png</resource>
