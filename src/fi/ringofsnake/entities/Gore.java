@@ -18,14 +18,21 @@ public class Gore extends AEntity {
 	
 	private float rotation;
 	
-	private final static Image resource = ResourceManager.fetchImage("BOX");
+	private final static Image[] resource = {ResourceManager.fetchImage("MEAT_1"), 
+											 ResourceManager.fetchImage("MEAT_2"), 
+											 ResourceManager.fetchImage("MEAT_3"),
+											 ResourceManager.fetchImage("BONE_1"),
+											 ResourceManager.fetchImage("BONE_2"),
+											 ResourceManager.fetchImage("BONE_3")};
 	
 	private Image image;
 	
 	public Gore(float posX, float posY) {
 		this.position.set(posX, posY);
 		this.velocity = new Vector2f();
-		image = resource.copy();
+		
+		int index = random.nextInt( resource.length );		
+		image = resource[index].copy();
 		
 	}
 	

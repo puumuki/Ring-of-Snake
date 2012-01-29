@@ -11,6 +11,9 @@ import fi.ringofsnake.io.ResourceManager;
 
 public class SquirrelMob extends AEntity {
 
+	private float horizontaPosition = 0;
+	
+	private float horizontalSpeed = 0.0001f;
 		
 	private Squirrel[] squirrels;
 	
@@ -22,7 +25,7 @@ public class SquirrelMob extends AEntity {
 	
 	public SquirrelMob( GameContainer cont ) {
 				
-		int maxHorizontalPosition = 100;
+		int maxHorizontalPosition = 50;
 		
 		int minVerticalPosition = 50;
 		int maxVerticalPosition = 500;		
@@ -31,7 +34,7 @@ public class SquirrelMob extends AEntity {
 		
 		for (int i = 0; i < squirrels.length; i++) {
 			
-			int x = -100;
+			int x = -300;
 			int y = 20;
 			
 			float speed = (float)Math.random() + 0.7f;
@@ -103,12 +106,19 @@ public class SquirrelMob extends AEntity {
 			chirps[whichToPlay].play();
 		}
 		
+		horizontaPosition += horizontalSpeed * delta;
+		
 		for (Squirrel sq : squirrels) {
+			sq.position.x += horizontaPosition; 			
 			sq.update(cont, delta);
 		}
-				
+		
+		
+		
 		Rectangle hitBox = (Rectangle)shape;
-		hitBox.setWidth(findSquirrelsMaxHorizontalPosition());		
+		hitBox.setWidth(findSquirrelsMaxHorizontalPosition());
+		
+		
 	}
 
 	public void stop() {

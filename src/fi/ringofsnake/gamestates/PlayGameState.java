@@ -12,7 +12,6 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fi.ringofsnake.main.Main;
-import fi.ringofsnake.entities.Box;
 import fi.ringofsnake.entities.ScrollingBackGround;
 import fi.ringofsnake.entities.SnakeMap;
 
@@ -26,12 +25,11 @@ import fi.ringofsnake.util.BoxDispenser;
 public class PlayGameState extends BasicGameState {
 
 	private int stateID = -1;
+	
 	private Player player;
 	private SquirrelMob squirrels;
 
 	private SnakeMap currentMap = null;
-
-	private float[] offset = { 0.0f, 0.0f };
 
 	private ScrollingBackGround scrollingBackGround;
 	
@@ -105,13 +103,9 @@ public class PlayGameState extends BasicGameState {
 		player.render(container, g);
 
 
-		//Draw scores and other things here. Bitch.
-		
-		drawDebugLines( container, g );
-		
-		boxes.render(container, g);
-		
-		
+		//Draw scores and other things here. Bitch.		
+		drawDebugLines( container, g );		
+		boxes.render(container, g);				
 	}
 
 	private void drawDebugLines( GameContainer cont, Graphics g ) {
@@ -135,20 +129,12 @@ public class PlayGameState extends BasicGameState {
 		if (input.isKeyPressed(Input.KEY_PAUSE)	|| input.isKeyPressed(Input.KEY_ESCAPE)) {
 			game.enterState(Main.MAINMENU_GAME_STATE);
 		}
-
-		int mod = currentMap.getTile(0, 0).getImage().getHeight(); // assume
-																	// rect
-																	// tiles
-		// FIXME bg scrolling, do this with camera?
-		float step = (float) Math.sin((double) (System.currentTimeMillis()) / 1000.0);
-		offset[0] = ((offset[0] + step) % mod);
-		offset[1] = ((offset[1] + step) % mod);								
-
-		scrollingBackGround.update(container, delta);	
+				
+		scrollingBackGround.update(container, delta);			
+		boxes.update(container, delta);				
+		currentMap.update(container, delta);
 		
-		boxes.update(container, delta);
-		
-		hitDetection();
+		hitDetection();		
 	}
 	
 	private void hitDetection() {

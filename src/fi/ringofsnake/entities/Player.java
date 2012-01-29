@@ -18,8 +18,10 @@ import org.newdawn.slick.geom.Vector2f;
 import fi.ringofsnake.io.ResourceManager;
 import fi.ringofsnake.util.Impulse;
 
-public class Player extends AEntity {
-		
+public class Player extends AEntity {	
+	
+	private static final int GORE_ITEM_COUNT = 5000;
+	
 	private int lives = 1;
 		
 	private Animation running;
@@ -32,6 +34,8 @@ public class Player extends AEntity {
 	private Impulse jumpImpulse;
 	
 	private float maxSpeed = 1.0f;
+	
+	private Sound catPissed;
 	
 	// FIXME
 	private int floorlevel = 450;
@@ -64,15 +68,17 @@ public class Player extends AEntity {
 		height = running.getHeight();
 		
 		shape = new Rectangle(position.x, 
-							  position.y, 
+							  position.y + 20, 
 							  jumping.getWidth(), 
-							  jumping.getHeight() );
+							  jumping.getHeight() -20 );
 		
 		Input.disableControllers();
 		
-		ResourceManager.fetchImage("");
+		catPissed = ResourceManager.fetchSound("CAT_PISSED");
 		
-		for( int i=0; i < 20; i++ ) {
+		
+		
+		for( int i=0; i < GORE_ITEM_COUNT; i++ ) {
 			Gore gore = new Gore(position.x, position.y);
 			this.gore.add( gore );
 		}
@@ -85,7 +91,20 @@ public class Player extends AEntity {
 	 */
 	@Override
 	public void render(GameContainer cont, Graphics grap) throws SlickException {
-
+		if( isAlive() ) {
+			renderLive(grap);
+		} else {
+			renderDead(cont, grap);	
+		}			
+	}
+	
+	private void renderDead( GameContainer cont, Graphics grap) throws SlickException {
+		for( Gore g : gore) {
+			g.render(cont, grap);
+		}
+	}
+	
+	private void renderLive(Graphics grap) {
 		if(isJumping())
 			grap.drawAnimation(jumping, position.x, position.y);
 		else
@@ -97,12 +116,6 @@ public class Player extends AEntity {
 		grap.drawString("pY " + position.y, 10, 570);
 				
 		grap.draw(shape);
-		
-		if( !isAlive() ) {
-			for( Gore g : gore) {
-				g.render(cont, grap);
-			}
-		}
 	}
 
 	/**
@@ -120,7 +133,8 @@ public class Player extends AEntity {
 		
 		if( isAlive() ) {
 			for( Gore g : gore ) {
-				g.setPos(this.position.x, this.position.y);
+				g.setPos(this.shape.getCenterX(), 
+						 this.shape.getCenterY());
 			}
 		} 
 		else {
@@ -168,7 +182,7 @@ public class Player extends AEntity {
 		}
 		
 		if ( (input.isKeyPressed(Input.KEY_UP) || input.isButton1Pressed(Input.ANY_CONTROLLER)) && touchingLand() ) {
-			jumpImpulse.launch(0.2f, new Vector2f(0,-0.08f));
+			jumpImpulse.launch(0.2f, new Vector2f(0,-0.12f));
 		}
 				
 		velocity.x += gravity.x;
@@ -212,7 +226,11 @@ public class Player extends AEntity {
 	
 	public void removeLive() {
 		if( isAlive() ){
-			this.lives--;	
+			this.lives--;
+			
+			if( catPissed.playing() == false ) {
+				catPissed.play();	
+			}
 		}		
 	}
 	
