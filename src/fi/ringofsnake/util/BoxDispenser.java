@@ -12,6 +12,7 @@ import org.newdawn.slick.SlickException;
 
 import fi.ringofsnake.entities.Box;
 import fi.ringofsnake.entities.Player;
+import fi.ringofsnake.entities.SquirrelMob;
 import fi.ringofsnake.io.ResourceManager;
 
 /**
@@ -30,10 +31,19 @@ public class BoxDispenser {
 	
 	private Player player;
 	
-	public BoxDispenser(Player player) {
+	private SquirrelMob squirrels;
+	
+	private Image boxBit1;
+	private Image boxBit2;
+	
+	public BoxDispenser(Player player, SquirrelMob squirrels) {
 		bangImg = ResourceManager.fetchImage("BANG").getScaledCopy(2.0f);
 		bangImg2 = ResourceManager.fetchImage("BANG_2").getScaledCopy(2.0f);
 		this.player = player;
+		this.squirrels = squirrels;
+
+		boxBit1 = ResourceManager.fetchImage("BOX_BIT_1").getScaledCopy(2.0f);
+		boxBit2 = ResourceManager.fetchImage("BOX_BIT_2").getScaledCopy(2.0f);
 	}
 	
 	private void createBox() {
@@ -66,7 +76,7 @@ public class BoxDispenser {
 
 				if (box.colliding(player)) {
 					if (box.isVisible()) {
-						box.hide();
+						box.hide(true);
 						player.boxHit();
 					}
 					
@@ -74,6 +84,16 @@ public class BoxDispenser {
 						bangImg.draw(box.position.x, box.position.y);
 					else
 						bangImg2.draw(box.position.x, box.position.y);
+				}
+				else if (box.colliding(squirrels) && !box.isGoo()) {
+					if (box.isVisible()) {
+						box.hide(true);
+					}
+					box.boxbitsdistance++;
+					boxBit1.rotate(box.boxbitsdistance / 10);
+					boxBit2.rotate(box.boxbitsdistance / -10);
+					boxBit1.draw(box.position.x, box.position.y - box.boxbitsdistance);
+					boxBit2.draw(box.position.x, box.position.y + box.boxbitsdistance);
 				}
 				else if (box.isVisible()) {
 					box.render(cont, g);
