@@ -6,11 +6,14 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
+import org.newdawn.slick.util.Log;
 
 import fi.ringofsnake.io.ResourceManager;
 
 public class Box extends AEntity {
 
+	public float tunnelHorizontalOffset = 0;
+	
 	private Image boxImg;
 	
 	public Box(int x, int y, float velX, float velY) {
@@ -26,11 +29,9 @@ public class Box extends AEntity {
 	
 	@Override
 	public void render(GameContainer cont, Graphics grap) throws SlickException {
-		
 		boxImg.draw(position.x, position.y);
-		grap.draw(shape);
-
 	}
+
 
 	@Override
 	public void update(GameContainer cont, int delta) throws SlickException {
@@ -38,7 +39,6 @@ public class Box extends AEntity {
 		position.add(velocity);
 		shape.setLocation(this.position.x, this.position.y);
 		
-		// TODO: check if off screen and destroy
 	}
 	
 }

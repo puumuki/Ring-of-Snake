@@ -12,7 +12,7 @@ public class SnakeMap implements IGameObject {
 		
 	private Player player;
 	
-	public float tunnelHorizontalOffset = 0;	
+	public float tunnelHorizontalOffset = 0;
 	public float tunnelSpeed = 0.5f;
 	
 	public static enum Tileset { 

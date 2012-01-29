@@ -21,6 +21,8 @@ import fi.ringofsnake.entities.SquirrelMob;
 import fi.ringofsnake.io.ResourceManager;
 import fi.ringofsnake.entities.Player;
 
+import fi.ringofsnake.util.BoxDispenser;
+
 public class PlayGameState extends BasicGameState {
 
 	private int stateID = -1;
@@ -43,7 +45,8 @@ public class PlayGameState extends BasicGameState {
 		return stateID;
 	}
 	
-	private Box box;
+	//Put dispenser here!
+	private BoxDispenser boxes;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -58,7 +61,7 @@ public class PlayGameState extends BasicGameState {
 		scrollingBackGround = new ScrollingBackGround(0.5f);
 		squirrels = new SquirrelMob();
 		
-		box = new Box(1500,400,-5.0f,0);
+		boxes = new BoxDispenser();
 	}
 
 
@@ -104,7 +107,7 @@ public class PlayGameState extends BasicGameState {
 		
 		drawDebugLines( container, g );
 		
-		box.render(container, g);
+		boxes.render(container, g);
 	}
 
 	private void drawDebugLines( GameContainer cont, Graphics g ) {
@@ -140,8 +143,9 @@ public class PlayGameState extends BasicGameState {
 
 		scrollingBackGround.update(container, delta);	
 		
-		box.update(container, delta);
+		boxes.update(container, delta);
 		
+		currentMap.tunnelHorizontalOffset += currentMap.tunnelSpeed * delta;
 		
 	}
 }
