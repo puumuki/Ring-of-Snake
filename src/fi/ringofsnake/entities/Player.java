@@ -51,6 +51,8 @@ public class Player extends AEntity {
 	private static final float padScaling = 0.5f;
 	private static final float deadZone = 0.05f;
 	
+	public float deadTime;
+	
 	/**
 	 * Creates a new player.
 	 */

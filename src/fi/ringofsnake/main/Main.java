@@ -34,7 +34,7 @@ public class Main extends StateBasedGame {
 	public static void main(String[] args) {			        
 		try {
 			AppGameContainer app = new AppGameContainer(new Main("Ring of Snake"));               
-	        app.setShowFPS(true);        
+	        app.setShowFPS(false);        
 	        app.setDisplayMode(1280, 720, false);
 	        app.setTargetFrameRate(60);
 	        app.start();        

@@ -10,6 +10,8 @@ import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import fi.ringofsnake.main.Main;
 import fi.ringofsnake.entities.NumberTable;
@@ -36,7 +38,7 @@ public class PlayGameState extends BasicGameState {
 
 	private ScrollingBackGround scrollingBackGround;
 	
-	private Music gamePlayMusic;
+	//private Music gamePlayMusic;
 	
 	public PlayGameState(int stateID) {
 		this.stateID = stateID;		
@@ -57,14 +59,14 @@ public class PlayGameState extends BasicGameState {
 		player = new Player(container);
 		currentMap = new SnakeMap(3000, 3, player);
 		
-		gamePlayMusic = ResourceManager.fetchMusic("GAMEPLAY_BG_MUSIC");
+		//gamePlayMusic = ResourceManager.fetchMusic("GAMEPLAY_BG_MUSIC");
 
 		scrollingBackGround = new ScrollingBackGround(0.5f);
 		squirrels = new SquirrelMob(container);
 		
 		player.position.x = squirrels.findSquirrelsMaxHorizontalPosition() + 10;
 		
-		boxes = new BoxDispenser(player);
+		boxes = new BoxDispenser(player, squirrels);
 		
 		scoreboard = new NumberTable(currentMap);
 		scoreboard.setPos( container.getWidth() -100 , container.getHeight() - 100 );
@@ -76,7 +78,7 @@ public class PlayGameState extends BasicGameState {
 			throws SlickException {
 		
 		super.enter(container, game);
-		gamePlayMusic.loop();	
+		//gamePlayMusic.loop();	
 	}
 	
 	@Override
@@ -84,7 +86,7 @@ public class PlayGameState extends BasicGameState {
 			throws SlickException {
 
 		super.leave(container, game);
-		gamePlayMusic.stop();
+		//gamePlayMusic.stop();
 		squirrels.stop();
 	}
 	
@@ -156,6 +158,16 @@ public class PlayGameState extends BasicGameState {
 		if( player.isAlive() ) {
 			scoreboard.update(container, delta);
 		}
+		else {
+			if (player.deadTime < 2500) {
+				player.deadTime += 1*delta;
+			}
+			else {
+				game.enterState(Main.GAMEOVER_GAME_STATE, 								
+						new FadeOutTransition(), 
+						new FadeInTransition());
+			}
+		}
 		
 		hitDetection();		
 	}
@@ -163,6 +175,7 @@ public class PlayGameState extends BasicGameState {
 	private void hitDetection() {
 		if( player.colliding(squirrels) ) {
 			player.removeLive();
+			player.deadTime++;
 		}
 	}
 }

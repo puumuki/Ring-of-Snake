@@ -31,6 +31,9 @@
 
 	<resource type="image" id="BANG">resources\ui\bang.png</resource>
 	<resource type="image" id="BANG_2">resources\ui\bang2.png</resource>
+	
+	<resource type="image" id="BOX_BIT_1">resources\objects\box_bit_1.png</resource>
+	<resource type="image" id="BOX_BIT_2">resources\objects\box_bit_2.png</resource>
 
 <!-- UI -->
 	<resource type="image" id="NUM_0">resources\ui\numbers\0.png</resource>
@@ -54,6 +57,8 @@
 	<resource type="image" id="MENU_BUTTON_PLAY">resources\ui\Play_button.png</resource>
 	<resource type="image" id="MENU_BUTTON_IFNO">resources\ui\Info_button.png</resource>
 	<resource type="image" id="MENU_BUTTON_QUIT">resources\ui\Quit_button.png</resource>
+
+	<resource type="image" id="GAMEOVER_BG">resources\ui\gameover.png</resource>
 
 	<!-- TILES -->	
 	<resource type="image" id="TILE_SPACE">resources\tiles\space.png</resource>	

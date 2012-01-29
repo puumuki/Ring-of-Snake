@@ -17,19 +17,25 @@ public class Box extends AEntity {
 	private Image boxImg;
 	
 	private boolean visible = true;
-	private int bangImg = 0;
+	private int bangImg = -1;
 	
 	private boolean rotating = true;
 	
+	private boolean goo = false;
+
+	public int boxbitsdistance;
+	
 	public Box(int x, int y, float velX, float velY) {
 		
-		if (Math.random() > 0.5)
+		if (Math.random() > 0.5) {
 			boxImg = ResourceManager.fetchImage("BOX").getScaledCopy(2.0f);
+		}
 		else {
 			boxImg = ResourceManager.fetchImage("GOO").getScaledCopy(0.75f);
 			rotating = false;
 			y = 480;
 			velX = -10.0f;
+			goo = true;
 		}
 		
 		position = new Vector2f(x, y);
@@ -56,9 +62,10 @@ public class Box extends AEntity {
 		
 	}
 	
-	public void hide() {
+	public void hide(boolean chooseBangImg) {
 		visible = false;
-		bangImg = (int)(Math.random() * 2);
+		if (chooseBangImg)
+			bangImg = (int)(Math.random() * 2);
 	}
 	
 	public boolean isVisible() {
@@ -67,6 +74,10 @@ public class Box extends AEntity {
 	
 	public int bangImage() {
 		return bangImg;
+	}
+	
+	public boolean isGoo() {
+		return goo;
 	}
 	
 }
