@@ -12,6 +12,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import fi.ringofsnake.main.Main;
+import fi.ringofsnake.entities.NumberTable;
 import fi.ringofsnake.entities.ScrollingBackGround;
 import fi.ringofsnake.entities.SnakeMap;
 
@@ -25,6 +26,8 @@ import fi.ringofsnake.util.BoxDispenser;
 public class PlayGameState extends BasicGameState {
 
 	private int stateID = -1;
+	
+	private NumberTable scoreboard;
 	
 	private Player player;
 	private SquirrelMob squirrels;
@@ -62,6 +65,9 @@ public class PlayGameState extends BasicGameState {
 		player.position.x = squirrels.findSquirrelsMaxHorizontalPosition() + 10;
 		
 		boxes = new BoxDispenser(player);
+		
+		scoreboard = new NumberTable(currentMap);
+		scoreboard.setPos( container.getWidth() -100 , container.getHeight() - 100 );
 	}
 
 
@@ -105,7 +111,9 @@ public class PlayGameState extends BasicGameState {
 
 		//Draw scores and other things here. Bitch.		
 		drawDebugLines( container, g );		
-		boxes.render(container, g);				
+		boxes.render(container, g);
+		
+		scoreboard.render(container, g);
 	}
 
 	private void drawDebugLines( GameContainer cont, Graphics g ) {
@@ -133,6 +141,10 @@ public class PlayGameState extends BasicGameState {
 		scrollingBackGround.update(container, delta);			
 		boxes.update(container, delta);				
 		currentMap.update(container, delta);
+		
+		if( player.isAlive() ) {
+			scoreboard.update(container, delta);
+		}
 		
 		hitDetection();		
 	}
